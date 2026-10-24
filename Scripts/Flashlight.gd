@@ -14,6 +14,9 @@ var is_light_normal: bool = true
 @export var energy_bar: Range
 ## Alpha de los nodos del grupo "enemies" con la luz apagada.
 @export var enemy_alpha_off: float = 0.1
+## class_name de enemigos que solo se ven dentro de la luz (la luz hace de máscara).
+## Los demás (Seeker, Patrol...) se ven de lejos.
+@export var light_only_ids: Array[StringName] = [&"Orbiter"]
 
 var is_on: bool = true
 var energy: float
@@ -46,4 +49,8 @@ func _process(delta: float):
 
 	var alpha := 1.0 if is_on else enemy_alpha_off
 	for enemy in get_tree().get_nodes_in_group("enemies"):
-		(enemy as CanvasItem).modulate.a = alpha
+		var item := enemy as CanvasItem
+		item.modulate.a = alpha
+		var script := item.get_script() as Script
+		if script and script.get_global_name() in light_only_ids and item.material is CanvasItemMaterial:
+			item.material.light_mode = CanvasItemMaterial.LIGHT_MODE_LIGHT_ONLY

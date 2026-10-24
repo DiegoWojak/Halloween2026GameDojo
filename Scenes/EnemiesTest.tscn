@@ -6,16 +6,16 @@
 [ext_resource type="PackedScene" path="res://Prefabs/Enemies/Orbiter/Orbiter.tscn" id="4_orbiter"]
 [ext_resource type="PackedScene" uid="uid://b7xuwjca1x6yn" path="res://Prefabs/Flashlight.tscn" id="5_flashlight"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_player"]
-radius = 14.0
-
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_unshaded"]
 light_mode = 1
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_player"]
+radius = 14.0
 
 [node name="Main" type="Node2D" unique_id=1807757088]
 script = ExtResource("1_level")
 
-[node name="CanvasModulate" type="CanvasModulate" parent="."]
+[node name="CanvasModulate" type="CanvasModulate" parent="." unique_id=1757676781]
 color = Color(0, 0, 0, 1)
 
 [node name="Player" type="CharacterBody2D" parent="." unique_id=692836180 groups=["player"]]
@@ -33,9 +33,11 @@ limit_top = 0
 limit_right = 1000
 limit_bottom = 1100
 
-[node name="Flashlight" parent="Player" node_paths=PackedStringArray("energy_bar") instance=ExtResource("5_flashlight")]
+[node name="Flashlight" parent="Player" unique_id=771459785 node_paths=PackedStringArray("energy_bar") instance=ExtResource("5_flashlight")]
 scale = Vector2(4, 4)
+drain_rate = 5.0
 energy_bar = NodePath("../../HUD/EnergyBar")
+enemy_alpha_off = 0.05
 
 [node name="Patrol1" parent="." unique_id=809552049 instance=ExtResource("3_patrol")]
 position = Vector2(100, 150)
@@ -87,7 +89,7 @@ offset_top = 16.0
 offset_right = 16.0
 offset_bottom = 16.0
 
-[node name="EnergyBar" type="ProgressBar" parent="HUD"]
+[node name="EnergyBar" type="ProgressBar" parent="HUD" unique_id=286120767]
 offset_left = 16.0
 offset_top = 48.0
 offset_right = 216.0
