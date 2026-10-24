@@ -1,4 +1,4 @@
-[gd_resource type="SpriteFrames" format=3]
+[gd_resource type="SpriteFrames" format=3 uid="uid://bdo7pfir7gteu"]
 
 [ext_resource type="Texture2D" uid="uid://cuped3qv4ba3i" path="res://Art/Sprites/player_idle.png" id="1_idle"]
 [ext_resource type="Texture2D" uid="uid://cbbd6he6oh5r7" path="res://Art/Sprites/player_lateral_mov.png" id="2_side"]
@@ -234,7 +234,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("idle_27")
 }],
-"loop": true,
+"loop": 1,
 "name": &"idle",
 "speed": 10.0
 }, {
@@ -263,7 +263,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("side_7")
 }],
-"loop": true,
+"loop": 1,
 "name": &"walk_side",
 "speed": 10.0
 }]

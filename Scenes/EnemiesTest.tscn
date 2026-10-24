@@ -8,7 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://yy6lt758tgnt" path="res://Art/Sprites/tile_floor.png" id="6_floor"]
 [ext_resource type="PackedScene" path="res://Prefabs/Key/Key.tscn" id="7_sfqgk"]
 [ext_resource type="Material" uid="uid://dqi6c4c4oqaa5" path="res://Art/Shaders/JitterUI.tres" id="8_jitter"]
-[ext_resource type="SpriteFrames" path="res://Art/Sprites/PlayerFrames.tres" id="9_frames"]
+[ext_resource type="SpriteFrames" uid="uid://bdo7pfir7gteu" path="res://Art/Sprites/PlayerFrames.tres" id="9_frames"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_unshaded"]
 light_mode = 1
@@ -30,7 +30,7 @@ material = SubResource("CanvasItemMaterial_unshaded")
 position = Vector2(480, 1050)
 script = ExtResource("2_player")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Player"]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Player" unique_id=1378440771]
 use_parent_material = true
 sprite_frames = ExtResource("9_frames")
 animation = &"idle"
