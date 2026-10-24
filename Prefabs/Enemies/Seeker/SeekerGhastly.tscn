@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://dfmuva50u6fxm"]
 
-[ext_resource type="Script" uid="uid://mayvaiva6fur" path="res://Prefabs/Enemies/Seeker/Seeker.gd" id="1_script"]
+[ext_resource type="Script" path="res://Prefabs/Enemies/Seeker/SeekerGhastly.gd" id="1_script"]
 [ext_resource type="Shader" uid="uid://hnfseiieoe0r" path="res://Prefabs/Enemies/Seeker/Ghastly.gdshader" id="2_shader"]
 [ext_resource type="Texture2D" uid="uid://c7ddxsjobrf8o" path="res://Prefabs/Enemies/Seeker/NoiseTexture.png" id="3_noise"]
 
@@ -13,8 +13,8 @@ shader_parameter/main_tex = ExtResource("3_noise")
 
 [node name="SeekerGhastly" type="Area2D" unique_id=1608970632 groups=["enemies"]]
 script = ExtResource("1_script")
-acceleration = 19.0
-lifetime = 25.0
+acceleration = 5.0
+lifetime = 10.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1875232132]
 shape = SubResource("CircleShape2D_hit")

@@ -5,6 +5,9 @@
 [ext_resource type="PackedScene" path="res://Prefabs/Enemies/Patrol/Patrol.tscn" id="3_patrol"]
 [ext_resource type="PackedScene" path="res://Prefabs/Enemies/Orbiter/Orbiter.tscn" id="4_orbiter"]
 [ext_resource type="PackedScene" uid="uid://b7xuwjca1x6yn" path="res://Prefabs/Flashlight.tscn" id="5_flashlight"]
+[ext_resource type="Texture2D" uid="uid://yy6lt758tgnt" path="res://Art/Sprites/tile_floor.png" id="6_floor"]
+[ext_resource type="PackedScene" path="res://Prefabs/Key/Key.tscn" id="7_sfqgk"]
+[ext_resource type="Material" uid="uid://dqi6c4c4oqaa5" path="res://Art/Shaders/JitterUI.tres" id="8_jitter"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_unshaded"]
 light_mode = 1
@@ -13,7 +16,10 @@ light_mode = 1
 radius = 14.0
 
 [node name="Main" type="Node2D" unique_id=1807757088]
+texture_filter = 1
+texture_repeat = 2
 script = ExtResource("1_level")
+floor_texture = ExtResource("6_floor")
 
 [node name="CanvasModulate" type="CanvasModulate" parent="." unique_id=1757676781]
 color = Color(0, 0, 0, 1)
@@ -83,6 +89,7 @@ radius = 150.0
 [node name="HUD" type="CanvasLayer" parent="." unique_id=1202816752]
 
 [node name="Label" type="Label" parent="HUD" unique_id=9133397]
+material = ExtResource("8_jitter")
 offset_left = 16.0
 offset_top = 16.0
 offset_right = 16.0
@@ -94,3 +101,6 @@ offset_top = 48.0
 offset_right = 216.0
 offset_bottom = 68.0
 show_percentage = false
+
+[node name="Key" parent="." unique_id=103710122 instance=ExtResource("7_sfqgk")]
+position = Vector2(950, 425)

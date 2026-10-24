@@ -29,6 +29,7 @@ var _secret_shown: bool = false
 
 func _ready() -> void:
 	energy = max_energy
+	add_to_group("flashlight")
 	_light_only_mat.light_mode = CanvasItemMaterial.LIGHT_MODE_LIGHT_ONLY
 	if energy_bar:
 		energy_bar.max_value = max_energy
@@ -64,3 +65,7 @@ func _process(delta: float):
 				if item is CanvasItem and (item.material == null or item.material is CanvasItemMaterial):
 					item.light_mask = id_light_mask
 					item.material = _light_only_mat
+
+## Radio (px de mundo) de la capa externa, según su textura y escala en el editor.
+func outer_radius() -> float:
+	return light_outer.texture.get_width() * 0.5 * light_outer.texture_scale * light_outer.global_scale.x

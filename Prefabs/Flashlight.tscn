@@ -19,6 +19,8 @@ script = ExtResource("1_e7i2y")
 light_normal = NodePath("Normal")
 light_secret = NodePath("Secret")
 light_outer = NodePath("Outer")
+inner_radius = 80.0
+outer_radius = 250.0
 
 [node name="Outer" type="PointLight2D" parent="." unique_id=503917264]
 energy = 0.6
@@ -28,7 +30,7 @@ texture_scale = 0.5
 [node name="Normal" type="PointLight2D" parent="." unique_id=1451971243]
 range_item_cull_mask = 5
 texture = SubResource("GradientTexture2D_4kxuq")
-texture_scale = 0.14
+texture_scale = 0.24
 
 [node name="Secret" type="PointLight2D" parent="." unique_id=1368516955]
 visible = false

@@ -9,6 +9,7 @@ extends CharacterBody2D
 
 var _stun_left := 0.0
 var _push_to := Vector2.ZERO
+var _mask := 1
 
 
 func die() -> void:
@@ -17,8 +18,12 @@ func die() -> void:
 	get_tree().reload_current_scene.call_deferred()
 
 
-## Sin control durante stun_time; mientras tanto es empujado hacia push_to (global).
+## Sin control durante stun_time; mientras tanto es empujado hacia push_to (global),
+## atravesando paredes para no quedar atrapado contra ellas.
 func stun(push_to: Vector2) -> void:
+	if _stun_left <= 0:
+		_mask = collision_mask
+	collision_mask = 0
 	_stun_left = stun_time
 	_push_to = push_to
 
@@ -28,6 +33,8 @@ func _physics_process(delta: float) -> void:
 		return
 	if _stun_left > 0:
 		_stun_left -= delta
+		if _stun_left <= 0:
+			collision_mask = _mask
 		modulate = Color(0.4, 0.7, 1, 0.5 + 0.5 * sin(_stun_left * 40)) if _stun_left > 0 else Color.WHITE
 		velocity = (_push_to - global_position).limit_length(push_speed * delta) / delta
 	else:
