@@ -1,13 +1,18 @@
 @tool
 extends CharacterBody2D
-## SOLO PRUEBA: jugador. Implementa el contrato que usan los enemigos:
-## grupo "player", die() y stun(push_to).
-## Se mueve con move_* (flechas/WASD). `facing` (4 direcciones) lo usa la Flashlight hija.
+## grupo "player", die(by) y hurt(by, push_to).
+## --> Se mueve con move_* (flechas/WASD). `facing` (4 direcciones) lo usa la Flashlight hija.
+## -->> Al morir muestra la pantalla del grupo "game_over" (GameOver.tscn);.
 
 @export var speed := 200.0
 @export var stun_time := 1.0
 @export var push_speed := 700.0
+## Golpes de Orbiter/Patrol que aguanta.
+@export var max_health := 3
+## Barra opcional (ProgressBar, TextureProgressBar...) que muestra la vida.
+@export var health_bar: Range
 
+var health: int
 var _stun_left := 0.0
 var _push_to := Vector2.ZERO
 var _mask := 1
@@ -17,10 +22,37 @@ var facing := Vector2.RIGHT
 @onready var _sprite: AnimatedSprite2D = $AnimatedSprite2D
 
 
-func die() -> void:
+func _ready() -> void:
+	if Engine.is_editor_hint():
+		return
+	health = max_health
+	if health_bar:
+		health_bar.max_value = max_health
+		health_bar.value = health
+
+
+## Muere al instante (Seeker). `by` = enemigo que lo mató, para la pantalla de muerte.
+func die(by: Node2D = null) -> void:
 	if _stun_left > 0:
 		return # invulnerable durante el stun
-	get_tree().reload_current_scene.call_deferred()
+	var game_over := get_tree().get_first_node_in_group("game_over")
+	if game_over:
+		game_over.show_killer.call_deferred(by) # diferido: llega desde una señal de física
+	else:
+		get_tree().reload_current_scene.call_deferred()
+
+
+## Quita 1 de vida y lo empuja a push_to (Orbiter, Patrol). Sin vida, muere.
+func hurt(by: Node2D, push_to: Vector2) -> void:
+	if _stun_left > 0:
+		return
+	health -= 1
+	if health_bar:
+		health_bar.value = health
+	if health <= 0:
+		die(by)
+	else:
+		stun(push_to)
 
 
 ## Sin control durante stun_time; mientras tanto es empujado hacia push_to (global),

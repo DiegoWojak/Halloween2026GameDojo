@@ -5,7 +5,7 @@ extends Area2D
 ## y desaparece tras `lifetime` segundos. Lo instancia el nivel (p. ej. al entrar a un cuarto).
 ## El visual vive en la escena (variantes: Seeker.tscn = triángulo, SeekerGhastly.tscn = fantasma).
 ##
-## Contrato con el jugador: nodo en el grupo "player" con método die().
+## Contrato con el jugador: nodo en el grupo "player" con método die(by). Mata al tocar.
 
 @export var speed := 40.0
 ## Cuánto sube speed por segundo (aumento lineal). 0 = velocidad constante.
@@ -33,4 +33,4 @@ func _physics_process(delta: float) -> void:
 
 func _on_body_entered(body: Node2D) -> void:
 	if body.is_in_group("player") and body.has_method("die"):
-		body.die()
+		body.die(self)

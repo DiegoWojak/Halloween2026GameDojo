@@ -1,0 +1,11 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://Prefabs/Level/Wall.gd" id="1_wall"]
+[ext_resource type="Texture2D" path="res://Art/Sprites/top_house.png" id="2_tex"]
+
+[node name="TopHouse" type="StaticBody2D"]
+texture_filter = 1
+texture_repeat = 2
+script = ExtResource("1_wall")
+texture = ExtResource("2_tex")
+size = Vector2(8, 64)

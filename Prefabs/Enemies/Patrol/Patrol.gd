@@ -3,9 +3,9 @@ class_name Patrol
 extends CharacterBody2D
 ## Enemigo Patrol (cuadrado).
 ## Patrulla entre point_a y point_b (relativos a su posición inicial).
-## Si el jugador entra a `room`, lo persigue. Al tocarlo lo stunea y lo empuja a `exit_point`.
+## Si el jugador entra a `room`, lo persigue. Al tocarlo le quita 1 de vida y lo empuja a `exit_point`.
 ##
-## Contrato con el jugador: nodo en el grupo "player" con método stun(push_to: Vector2).
+## Contrato con el jugador: nodo en el grupo "player" con método hurt(by, push_to).
 
 ## Zona que vigila, en coordenadas globales. Vacía = nunca persigue.
 @export var room := Rect2():
@@ -59,12 +59,12 @@ func _physics_process(_delta: float) -> void:
 
 
 func _on_hitbox_body_entered(body: Node2D) -> void:
-	if not body.is_in_group("player") or not body.has_method("stun"):
+	if not body.is_in_group("player") or not body.has_method("hurt"):
 		return
 	var push_to := exit_point
 	if push_to == Vector2.ZERO:
 		push_to = body.global_position + global_position.direction_to(body.global_position) * push_distance
-	body.stun(push_to)
+	body.hurt(self, push_to)
 
 
 func _draw() -> void:
