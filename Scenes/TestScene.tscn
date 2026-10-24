@@ -1,0 +1,29 @@
+[gd_scene format=3 uid="uid://com8xhckl7r3u"]
+
+[ext_resource type="Texture2D" uid="uid://0rydoxudf4m" path="res://icon.svg" id="1_b5ayd"]
+[ext_resource type="PackedScene" uid="uid://b7xuwjca1x6yn" path="res://Prefabs/Flashlight.tscn" id="2_5lt6y"]
+
+[node name="TestScene" type="Node2D" unique_id=1202072820]
+
+[node name="CanvasModulate" type="CanvasModulate" parent="." unique_id=772661277]
+color = Color(0, 0, 0, 1)
+
+[node name="Background" type="Sprite2D" parent="." unique_id=1017869839]
+scale = Vector2(3.2981205, 3.2981205)
+texture = ExtResource("1_b5ayd")
+
+[node name="ItemSecret" type="Sprite2D" parent="." unique_id=1637725834 groups=["secret"]]
+self_modulate = Color(2.454227, 2.454227, 2.454227, 1)
+light_mask = 2
+z_as_relative = false
+position = Vector2(72, 25.000002)
+scale = Vector2(1.1724977, 1.1724977)
+texture = ExtResource("1_b5ayd")
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1650998712]
+
+[node name="Flashlight" parent="." unique_id=78662924 instance=ExtResource("2_5lt6y")]
+position = Vector2(-1.0000019, -24)
+scale = Vector2(4.14596, 4.14596)
+
+[editable path="Flashlight"]
