@@ -9,6 +9,9 @@ class_name Flashlight extends Node2D
 @export var light_normal: ConeLight
 ## Luz ultravioleta.
 @export var light_secret: ConeLight
+## Opcional: acompaña a la luz normal, más larga y tenue, para ver más lejos.
+## Como la normal, no revela los enemigos de light_only_ids.
+@export var light_outer: ConeLight
 var is_light_normal: bool = true
 
 @export_group("Energy")
@@ -57,6 +60,8 @@ func _process(delta: float):
 
 	light_normal.visible = is_on and is_light_normal
 	light_secret.visible = is_on and not is_light_normal
+	if light_outer:
+		light_outer.visible = is_on and is_light_normal
 	var secret_visible := is_on and not is_light_normal
 	if secret_visible != _secret_shown:
 		_secret_shown = secret_visible

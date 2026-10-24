@@ -50,7 +50,22 @@ func _physics_process(delta: float) -> void:
 		elif input.y != 0:
 			facing = Vector2(0, signf(input.y))
 	move_and_slide()
-	# ponytail: arriba/abajo usan walk_side hasta que llegue player_horizontal_mov.png
-	if facing.x != 0:
-		_sprite.flip_h = facing.x < 0
-	_sprite.play(&"walk_side" if velocity.length() > 1.0 else &"idle")
+	_animate()
+
+
+## walk_side / walk_up / walk_down según facing. Quieto: idle de lado; mirando
+## arriba/abajo queda en el primer frame de esa caminata (no hay idle vertical).
+func _animate() -> void:
+	var anim := &"walk_side"
+	if facing.y < 0:
+		anim = &"walk_up"
+	elif facing.y > 0:
+		anim = &"walk_down"
+	_sprite.flip_h = facing.x < 0
+	if velocity.length() > 1.0:
+		_sprite.play(anim)
+	elif anim == &"walk_side":
+		_sprite.play(&"idle")
+	else:
+		_sprite.animation = anim
+		_sprite.stop()
