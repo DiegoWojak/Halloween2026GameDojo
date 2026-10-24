@@ -2,6 +2,8 @@ class_name Flashlight extends Node2D
 
 @export var light_normal: PointLight2D
 @export var light_secret: PointLight2D
+## Capa externa: ilumina muros, objetos y enemigos fuera de light_only_ids.
+@export var light_outer: PointLight2D
 var is_light_normal: bool = true
 
 @export_group("Energy")
@@ -12,11 +14,14 @@ var is_light_normal: bool = true
 @export var recharge_rate: float = 12.0
 ## Barra opcional (ProgressBar, TextureProgressBar...) que muestra la energía.
 @export var energy_bar: Range
-## Alpha de los nodos del grupo "enemies" con la luz apagada.
-@export var enemy_alpha_off: float = 0.1
-## class_name de enemigos que solo se ven dentro de la luz (la luz hace de máscara).
-## Los demás (Seeker, Patrol...) se ven de lejos.
+## class_name de enemigos que solo se ven en la capa interna (light_normal).
+## Los demás (Seeker, Patrol...) se ven también en la capa externa.
 @export var light_only_ids: Array[StringName] = [&"Orbiter"]
+## Capa de luz de los enemigos en light_only_ids. Debe estar en el
+## range_item_cull_mask de light_normal y fuera del de light_outer.
+@export_flags_2d_render var id_light_mask: int = 4
+
+var _light_only_mat := CanvasItemMaterial.new()
 
 var is_on: bool = true
 var energy: float
@@ -24,6 +29,7 @@ var _secret_shown: bool = false
 
 func _ready() -> void:
 	energy = max_energy
+	_light_only_mat.light_mode = CanvasItemMaterial.LIGHT_MODE_LIGHT_ONLY
 	if energy_bar:
 		energy_bar.max_value = max_energy
 
@@ -42,15 +48,19 @@ func _process(delta: float):
 
 	light_normal.visible = is_on and is_light_normal
 	light_secret.visible = is_on and not is_light_normal
+	light_outer.visible = is_on
 	var secret_visible := is_on and not is_light_normal
 	if secret_visible != _secret_shown:
 		_secret_shown = secret_visible
 		GlobalManager.secret_toggle_visibility(secret_visible)
 
-	var alpha := 1.0 if is_on else enemy_alpha_off
+	# Fuera de la luz todo es oscuridad: los enemigos usan material normal (CanvasModulate negro).
+	# Los de light_only_ids van a su propia capa y en LIGHT_ONLY, así no dejan silueta negra
+	# sobre el piso iluminado por la capa externa.
 	for enemy in get_tree().get_nodes_in_group("enemies"):
-		var item := enemy as CanvasItem
-		item.modulate.a = alpha
-		var script := item.get_script() as Script
-		if script and script.get_global_name() in light_only_ids and item.material is CanvasItemMaterial:
-			item.material.light_mode = CanvasItemMaterial.LIGHT_MODE_LIGHT_ONLY
+		var script := enemy.get_script() as Script
+		if script and script.get_global_name() in light_only_ids:
+			for item in [enemy] + enemy.get_children():
+				if item is CanvasItem and (item.material == null or item.material is CanvasItemMaterial):
+					item.light_mask = id_light_mask
+					item.material = _light_only_mat

@@ -1,5 +1,4 @@
 shader_type canvas_item;
-render_mode unshaded;
 
 uniform sampler2D main_tex : source_color, repeat_enable;
 

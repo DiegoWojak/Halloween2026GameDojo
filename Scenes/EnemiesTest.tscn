@@ -37,7 +37,6 @@ limit_bottom = 1100
 scale = Vector2(4, 4)
 drain_rate = 5.0
 energy_bar = NodePath("../../HUD/EnergyBar")
-enemy_alpha_off = 0.05
 
 [node name="Patrol1" parent="." unique_id=809552049 instance=ExtResource("3_patrol")]
 position = Vector2(100, 150)

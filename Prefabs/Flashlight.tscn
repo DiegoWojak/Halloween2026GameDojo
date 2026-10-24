@@ -3,24 +3,36 @@
 [ext_resource type="Script" uid="uid://dbj4ce5rpt2ai" path="res://Scripts/Flashlight.gd" id="1_e7i2y"]
 
 [sub_resource type="Gradient" id="Gradient_sctno"]
+offsets = PackedFloat32Array(0, 0.85, 1)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 1)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_4kxuq"]
 gradient = SubResource("Gradient_sctno")
-fill_from = Vector2(1, 1)
-fill_to = Vector2(0, 0)
+width = 256
+height = 256
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(1, 0.5)
 
-[node name="Flashlight" type="Node2D" unique_id=78662924 node_paths=PackedStringArray("light_normal", "light_secret")]
+[node name="Flashlight" type="Node2D" unique_id=78662924 node_paths=PackedStringArray("light_normal", "light_secret", "light_outer")]
 script = ExtResource("1_e7i2y")
 light_normal = NodePath("Normal")
 light_secret = NodePath("Secret")
+light_outer = NodePath("Outer")
+
+[node name="Outer" type="PointLight2D" parent="." unique_id=503917264]
+energy = 0.6
+texture = SubResource("GradientTexture2D_4kxuq")
+texture_scale = 0.5
 
 [node name="Normal" type="PointLight2D" parent="." unique_id=1451971243]
+range_item_cull_mask = 5
 texture = SubResource("GradientTexture2D_4kxuq")
-texture_scale = 0.54
+texture_scale = 0.14
 
 [node name="Secret" type="PointLight2D" parent="." unique_id=1368516955]
 visible = false
 color = Color(0.6783516, 0.00034663768, 0.678347, 1)
 range_item_cull_mask = 3
 texture = SubResource("GradientTexture2D_4kxuq")
-texture_scale = 0.54
+texture_scale = 0.14
