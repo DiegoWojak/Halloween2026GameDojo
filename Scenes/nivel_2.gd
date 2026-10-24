@@ -22,12 +22,12 @@ extends Node2D
 
 @export_group("Escenas")
 @export var fade_screen: FadeScreen
+@export var menu: PackedScene
 
 const EXIT_RECT := Rect2(440, 0, 120, 40)
 
 var _has_key := false
-var _current_room := -1
-var _ghastly_timer := 0.0
+
 
 @onready var _player: Node2D = $Player
 @onready var _label: Label = $HUD/Label
@@ -65,24 +65,11 @@ func _process(delta: float) -> void:
 	
 
 		
-	if ghastly_interval > 0:
-		_ghastly_timer += delta
-		if _ghastly_timer >= ghastly_interval:
-			_ghastly_timer = 0.0
-			if get_tree().get_nodes_in_group("ghastly").size() < max_ghastly:
-				_spawn_ghastly(p)
+	
+				
 
 
-func _spawn_ghastly(player_pos: Vector2) -> void:
-	var pos := player_pos
-	for i in 20: # ponytail: muestreo al azar; si el mapa es chico puede quedar más cerca que ghastly_min_distance
-		
-		if pos.distance_to(player_pos) >= ghastly_min_distance:
-			break
-	var g := ghastly_scene.instantiate()
-	g.position = pos
-	g.add_to_group("ghastly")
-	add_child(g)
+
 
 
 
@@ -99,3 +86,9 @@ func _spawn_seeker(room: Rect2, player_pos: Vector2) -> void:
 	s.position = best.lerp(room.get_center(), 0.15)
 	s.add_to_group("seekers")
 	add_child(s)
+
+
+func _on_area_2d_body_entered(body: Node2D) -> void:
+	if body is Jugador and _has_key:
+		await fade_screen.fade_to_black()
+		get_tree().change_scene_to_packed(menu)

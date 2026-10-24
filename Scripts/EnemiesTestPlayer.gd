@@ -1,5 +1,6 @@
 @tool
 extends CharacterBody2D
+class_name Jugador
 ## SOLO PRUEBA: jugador. Implementa el contrato que usan los enemigos:
 ## grupo "player", die() y stun(push_to).
 ## Se mueve con move_* (flechas/WASD). `facing` (4 direcciones) lo usa la Flashlight hija.
