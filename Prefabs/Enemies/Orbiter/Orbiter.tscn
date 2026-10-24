@@ -1,11 +1,15 @@
 [gd_scene format=3]
 
-[ext_resource type="Script" path="res://enemies/orbiter/orbiter.gd" id="1_script"]
+[ext_resource type="Script" path="res://Prefabs/Enemies/Orbiter/Orbiter.gd" id="1_script"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_hit"]
 radius = 12.0
 
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_unshaded"]
+light_mode = 1
+
 [node name="Orbiter" type="Area2D" groups=["enemies"]]
+material = SubResource("CanvasItemMaterial_unshaded")
 script = ExtResource("1_script")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

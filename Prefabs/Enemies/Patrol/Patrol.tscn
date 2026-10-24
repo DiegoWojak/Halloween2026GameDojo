@@ -1,6 +1,6 @@
 [gd_scene format=3]
 
-[ext_resource type="Script" path="res://enemies/patrol/patrol.gd" id="1_script"]
+[ext_resource type="Script" path="res://Prefabs/Enemies/Patrol/Patrol.gd" id="1_script"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_body"]
 size = Vector2(28, 28)
@@ -8,7 +8,11 @@ size = Vector2(28, 28)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hit"]
 size = Vector2(34, 34)
 
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_unshaded"]
+light_mode = 1
+
 [node name="Patrol" type="CharacterBody2D" groups=["enemies"]]
+material = SubResource("CanvasItemMaterial_unshaded")
 script = ExtResource("1_script")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

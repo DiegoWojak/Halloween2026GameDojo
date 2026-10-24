@@ -1,0 +1,26 @@
+[gd_scene format=3 uid="uid://b7xuwjca1x6yn"]
+
+[ext_resource type="Script" uid="uid://dbj4ce5rpt2ai" path="res://Scripts/Flashlight.gd" id="1_e7i2y"]
+
+[sub_resource type="Gradient" id="Gradient_sctno"]
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_4kxuq"]
+gradient = SubResource("Gradient_sctno")
+fill_from = Vector2(1, 1)
+fill_to = Vector2(0, 0)
+
+[node name="Flashlight" type="Node2D" unique_id=78662924 node_paths=PackedStringArray("light_normal", "light_secret")]
+script = ExtResource("1_e7i2y")
+light_normal = NodePath("Normal")
+light_secret = NodePath("Secret")
+
+[node name="Normal" type="PointLight2D" parent="." unique_id=1451971243]
+texture = SubResource("GradientTexture2D_4kxuq")
+texture_scale = 0.54
+
+[node name="Secret" type="PointLight2D" parent="." unique_id=1368516955]
+visible = false
+color = Color(0.6783516, 0.00034663768, 0.678347, 1)
+range_item_cull_mask = 3
+texture = SubResource("GradientTexture2D_4kxuq")
+texture_scale = 0.54

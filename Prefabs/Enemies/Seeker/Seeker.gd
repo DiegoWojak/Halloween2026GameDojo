@@ -3,7 +3,7 @@ class_name Seeker
 extends Area2D
 ## Enemigo Seeker (triángulo). Va lento hacia el jugador atravesando paredes
 ## y desaparece tras `lifetime` segundos. Lo instancia el nivel (p. ej. al entrar a un cuarto).
-## El visual vive en la escena (variantes: seeker.tscn = triángulo, seeker_ghastly.tscn = fantasma).
+## El visual vive en la escena (variantes: Seeker.tscn = triángulo, SeekerGhastly.tscn = fantasma).
 ##
 ## Contrato con el jugador: nodo en el grupo "player" con método die().
 

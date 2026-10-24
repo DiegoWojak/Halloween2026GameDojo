@@ -5,13 +5,13 @@ extends Node2D
 
 @export_group("Seeker (desde cuartos)")
 ## Aparece al entrar a un cuarto, en la esquina más lejana al jugador.
-@export var seeker_scene: PackedScene = preload("res://enemies/seeker/seeker.tscn")
+@export var seeker_scene: PackedScene = preload("res://Prefabs/Enemies/Seeker/Seeker.tscn")
 ## Máximo de seekers normales vivos a la vez.
 @export var max_seekers := 2
 
 @export_group("Ghastly (cualquier lado)")
 ## Aparece en un punto al azar del mapa, lejos del jugador.
-@export var ghastly_scene: PackedScene = preload("res://enemies/seeker/seeker_ghastly.tscn")
+@export var ghastly_scene: PackedScene = preload("res://Prefabs/Enemies/Seeker/SeekerGhastly.tscn")
 ## Segundos entre apariciones. 0 = desactivado.
 @export var ghastly_interval := 20.0
 ## Máximo de ghastly vivos a la vez.

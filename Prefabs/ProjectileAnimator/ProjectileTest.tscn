@@ -1,0 +1,31 @@
+[gd_scene format=3 uid="uid://cw5fpo3c01wyt"]
+
+[ext_resource type="Texture2D" uid="uid://f50rbjdwlhdo" path="res://Art/Sprites/ClockProgress.tres" id="1_dccib"]
+[ext_resource type="Script" uid="uid://ctxwt5lnifbiy" path="res://Prefabs/ProjectileAnimator/ProjectileTest.gd" id="2_dccib"]
+
+[node name="ProjectileTest" type="Node2D" unique_id=882156350 node_paths=PackedStringArray("origin", "node", "target")]
+script = ExtResource("2_dccib")
+origin = NodePath("origin")
+node = NodePath("node")
+target = NodePath("target")
+
+[node name="origin" type="Sprite2D" parent="." unique_id=1319949892]
+modulate = Color(0.19793725, 0.19793722, 0.19793722, 1)
+position = Vector2(-2128, 1716)
+texture = ExtResource("1_dccib")
+
+[node name="center" type="Sprite2D" parent="." unique_id=1974750149]
+modulate = Color(0, 0.22923419, 0.23016006, 1)
+texture = ExtResource("1_dccib")
+
+[node name="target" type="Sprite2D" parent="." unique_id=790342766]
+modulate = Color(0.050838992, 0.5998273, 0, 1)
+position = Vector2(-2128, 1716)
+texture = ExtResource("1_dccib")
+
+[node name="node" type="Sprite2D" parent="." unique_id=1048449480]
+position = Vector2(-2095, 1918)
+texture = ExtResource("1_dccib")
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=317444905]
+zoom = Vector2(0.155, 0.155)

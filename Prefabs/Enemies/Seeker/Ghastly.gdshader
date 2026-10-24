@@ -3,8 +3,11 @@ render_mode unshaded;
 
 uniform sampler2D main_tex : source_color, repeat_enable;
 
+// modulate del nodo (p. ej. alpha 0.1 con la linterna apagada); COLOR del fragment lo pisa
+varying vec4 node_modulate;
+
 void vertex() {
-	// Called for every vertex the material is visible on.
+	node_modulate = COLOR;
 }
 
 float body(vec2 p)
@@ -155,7 +158,7 @@ void fragment() {
 	render = clamp(render, 0.0 , 1.0);
 	float alpha = clamp (smoke_shape + body_shape + right_eye_shape, 0.0, 1.0);
 
-	COLOR = vec4(render, alpha);
+	COLOR = vec4(render, alpha) * node_modulate;
 }
 
 //void light() {

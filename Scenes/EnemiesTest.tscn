@@ -1,17 +1,25 @@
 [gd_scene format=3 uid="uid://dkvscq6d5iaso"]
 
-[ext_resource type="Script" uid="uid://b65kybwerhq6e" path="res://scripts/level.gd" id="1_level"]
-[ext_resource type="Script" uid="uid://2yxtu4jirkhp" path="res://scripts/player.gd" id="2_player"]
-[ext_resource type="PackedScene" path="res://enemies/patrol/patrol.tscn" id="3_patrol"]
-[ext_resource type="PackedScene" path="res://enemies/orbiter/orbiter.tscn" id="4_orbiter"]
+[ext_resource type="Script" uid="uid://b65kybwerhq6e" path="res://Scripts/EnemiesTestLevel.gd" id="1_level"]
+[ext_resource type="Script" uid="uid://2yxtu4jirkhp" path="res://Scripts/EnemiesTestPlayer.gd" id="2_player"]
+[ext_resource type="PackedScene" path="res://Prefabs/Enemies/Patrol/Patrol.tscn" id="3_patrol"]
+[ext_resource type="PackedScene" path="res://Prefabs/Enemies/Orbiter/Orbiter.tscn" id="4_orbiter"]
+[ext_resource type="PackedScene" uid="uid://b7xuwjca1x6yn" path="res://Prefabs/Flashlight.tscn" id="5_flashlight"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_player"]
 radius = 14.0
 
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_unshaded"]
+light_mode = 1
+
 [node name="Main" type="Node2D" unique_id=1807757088]
 script = ExtResource("1_level")
 
+[node name="CanvasModulate" type="CanvasModulate" parent="."]
+color = Color(0, 0, 0, 1)
+
 [node name="Player" type="CharacterBody2D" parent="." unique_id=692836180 groups=["player"]]
+material = SubResource("CanvasItemMaterial_unshaded")
 position = Vector2(480, 1050)
 script = ExtResource("2_player")
 
@@ -24,6 +32,10 @@ limit_left = 0
 limit_top = 0
 limit_right = 1000
 limit_bottom = 1100
+
+[node name="Flashlight" parent="Player" node_paths=PackedStringArray("energy_bar") instance=ExtResource("5_flashlight")]
+scale = Vector2(4, 4)
+energy_bar = NodePath("../../HUD/EnergyBar")
 
 [node name="Patrol1" parent="." unique_id=809552049 instance=ExtResource("3_patrol")]
 position = Vector2(100, 150)
@@ -74,3 +86,10 @@ offset_left = 16.0
 offset_top = 16.0
 offset_right = 16.0
 offset_bottom = 16.0
+
+[node name="EnergyBar" type="ProgressBar" parent="HUD"]
+offset_left = 16.0
+offset_top = 48.0
+offset_right = 216.0
+offset_bottom = 68.0
+show_percentage = false

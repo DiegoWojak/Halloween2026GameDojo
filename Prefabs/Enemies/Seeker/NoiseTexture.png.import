@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://c7ddxsjobrf8o"
-path="res://.godot/imported/noiseTexture.png-fe8be9f1fedda7d617bc8c9df3867d94.ctex"
+path="res://.godot/imported/NoiseTexture.png-9898f5342e58a6d9515df2bf4861eeac.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://enemies/seeker/noiseTexture.png"
-dest_files=["res://.godot/imported/noiseTexture.png-fe8be9f1fedda7d617bc8c9df3867d94.ctex"]
+source_file="res://Prefabs/Enemies/Seeker/NoiseTexture.png"
+dest_files=["res://.godot/imported/NoiseTexture.png-9898f5342e58a6d9515df2bf4861eeac.ctex"]
 
 [params]
 
