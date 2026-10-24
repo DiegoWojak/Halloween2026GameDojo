@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="HalloweenGameJam2026"
-run/main_scene="res://Scenes/EnemiesTest.tscn"
+run/main_scene="uid://nc8v43vxn577"
 config/features=PackedStringArray("4.7", "GL Compatibility")
 config/icon="res://icon.svg"
 
@@ -27,6 +27,7 @@ MCPRuntime="*uid://ca123qqhj8ku3"
 [display]
 
 window/stretch/mode="canvas_items"
+window/stretch/aspect="expand"
 
 [editor_plugins]
 

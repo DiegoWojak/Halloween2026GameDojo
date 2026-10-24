@@ -41,6 +41,10 @@ extends Node2D
 	set(v):
 		wall_seed = v
 		queue_redraw()
+		
+@export_group("Escenas")
+@export var level2: PackedScene
+@export var fade_screen: FadeScreen
 
 const SIZE := Vector2(1000, 1100)
 const WALL_TILE := 16.0
@@ -78,6 +82,7 @@ var _ghastly_timer := 0.0
 
 
 func _ready() -> void:
+	await fade_screen.fade_to_image()
 	if Engine.is_editor_hint():
 		return
 	var body := StaticBody2D.new()
@@ -107,7 +112,9 @@ func _process(delta: float) -> void:
 	if EXIT_RECT.has_point(p):
 		if _has_key:
 			_label.text = "¡Escapaste!"
-			get_tree().paused = true
+			await fade_screen.fade_to_black()
+			get_tree().change_scene_to_packed(level2)
+			#aca instatizo nivel
 		else:
 			_label.text = "Necesitas la llave"
 	var room := _room_at(p)

@@ -2,13 +2,15 @@
 
 [ext_resource type="Script" uid="uid://b65kybwerhq6e" path="res://Scripts/EnemiesTestLevel.gd" id="1_level"]
 [ext_resource type="Script" uid="uid://2yxtu4jirkhp" path="res://Scripts/EnemiesTestPlayer.gd" id="2_player"]
+[ext_resource type="PackedScene" uid="uid://cd36xq0tsdv4b" path="res://Scenes/Nivel_2.tscn" id="3_coos7"]
 [ext_resource type="PackedScene" path="res://Prefabs/Enemies/Patrol/Patrol.tscn" id="3_patrol"]
 [ext_resource type="PackedScene" path="res://Prefabs/Enemies/Orbiter/Orbiter.tscn" id="4_orbiter"]
 [ext_resource type="PackedScene" uid="uid://b7xuwjca1x6yn" path="res://Prefabs/Flashlight.tscn" id="5_flashlight"]
 [ext_resource type="Texture2D" uid="uid://yy6lt758tgnt" path="res://Art/Sprites/tile_floor.png" id="6_floor"]
 [ext_resource type="PackedScene" path="res://Prefabs/Key/Key.tscn" id="7_sfqgk"]
 [ext_resource type="Material" uid="uid://dqi6c4c4oqaa5" path="res://Art/Shaders/JitterUI.tres" id="8_jitter"]
-[ext_resource type="SpriteFrames" path="res://Art/Sprites/PlayerFrames.tres" id="9_frames"]
+[ext_resource type="SpriteFrames" uid="uid://bdo7pfir7gteu" path="res://Art/Sprites/PlayerFrames.tres" id="9_frames"]
+[ext_resource type="PackedScene" uid="uid://bagmkuypgdpso" path="res://Prefabs/FadeScreen/FadeScreen.tscn" id="11_q4gsj"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_unshaded"]
 light_mode = 1
@@ -16,11 +18,13 @@ light_mode = 1
 [sub_resource type="CircleShape2D" id="CircleShape2D_player"]
 radius = 14.0
 
-[node name="Main" type="Node2D" unique_id=1807757088]
+[node name="Main" type="Node2D" unique_id=1807757088 node_paths=PackedStringArray("fade_screen")]
 texture_filter = 1
 texture_repeat = 2
 script = ExtResource("1_level")
 floor_texture = ExtResource("6_floor")
+level2 = ExtResource("3_coos7")
+fade_screen = NodePath("FadeScreen")
 
 [node name="CanvasModulate" type="CanvasModulate" parent="." unique_id=1757676781]
 color = Color(0, 0, 0, 1)
@@ -30,7 +34,7 @@ material = SubResource("CanvasItemMaterial_unshaded")
 position = Vector2(480, 1050)
 script = ExtResource("2_player")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Player"]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Player" unique_id=1600523674]
 use_parent_material = true
 sprite_frames = ExtResource("9_frames")
 animation = &"idle"
@@ -111,3 +115,5 @@ show_percentage = false
 
 [node name="Key" parent="." unique_id=103710122 instance=ExtResource("7_sfqgk")]
 position = Vector2(950, 425)
+
+[node name="FadeScreen" parent="." unique_id=1400393650 instance=ExtResource("11_q4gsj")]
