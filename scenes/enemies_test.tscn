@@ -1,0 +1,76 @@
+[gd_scene format=3 uid="uid://dkvscq6d5iaso"]
+
+[ext_resource type="Script" uid="uid://b65kybwerhq6e" path="res://scripts/level.gd" id="1_level"]
+[ext_resource type="Script" uid="uid://2yxtu4jirkhp" path="res://scripts/player.gd" id="2_player"]
+[ext_resource type="PackedScene" path="res://enemies/patrol/patrol.tscn" id="3_patrol"]
+[ext_resource type="PackedScene" path="res://enemies/orbiter/orbiter.tscn" id="4_orbiter"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_player"]
+radius = 14.0
+
+[node name="Main" type="Node2D" unique_id=1807757088]
+script = ExtResource("1_level")
+
+[node name="Player" type="CharacterBody2D" parent="." unique_id=692836180 groups=["player"]]
+position = Vector2(480, 1050)
+script = ExtResource("2_player")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player" unique_id=406127404]
+shape = SubResource("CircleShape2D_player")
+
+[node name="Camera2D" type="Camera2D" parent="Player" unique_id=655682903]
+zoom = Vector2(1.5, 1.5)
+limit_left = 0
+limit_top = 0
+limit_right = 1000
+limit_bottom = 1100
+
+[node name="Patrol1" parent="." unique_id=809552049 instance=ExtResource("3_patrol")]
+position = Vector2(100, 150)
+room = Rect2(0, 0, 440, 300)
+exit_point = Vector2(385, 340)
+point_b = Vector2(220, 0)
+
+[node name="Patrol2" parent="." unique_id=307512546 instance=ExtResource("3_patrol")]
+position = Vector2(60, 700)
+room = Rect2(0, 550, 300, 300)
+exit_point = Vector2(350, 700)
+point_b = Vector2(180, 0)
+
+[node name="Patrol3" parent="." unique_id=960041796 instance=ExtResource("3_patrol")]
+position = Vector2(760, 700)
+room = Rect2(700, 550, 300, 300)
+exit_point = Vector2(650, 700)
+point_b = Vector2(180, 0)
+
+[node name="Patrol4" parent="." unique_id=256974158 instance=ExtResource("3_patrol")]
+position = Vector2(620, 975)
+room = Rect2(540, 850, 460, 250)
+exit_point = Vector2(480, 1000)
+point_b = Vector2(300, 0)
+
+[node name="Orbiter1" parent="." unique_id=230529836 instance=ExtResource("4_orbiter")]
+position = Vector2(150, 425)
+
+[node name="Orbiter2" parent="." unique_id=1835364937 instance=ExtResource("4_orbiter")]
+position = Vector2(900, 425)
+mode = 1
+radius = 60.0
+
+[node name="Orbiter3" parent="." unique_id=1977273365 instance=ExtResource("4_orbiter")]
+position = Vector2(500, 575)
+mode = 1
+radius = 120.0
+speed = 1.5
+
+[node name="Orbiter4" parent="." unique_id=594297069 instance=ExtResource("4_orbiter")]
+position = Vector2(780, 150)
+radius = 150.0
+
+[node name="HUD" type="CanvasLayer" parent="." unique_id=1202816752]
+
+[node name="Label" type="Label" parent="HUD" unique_id=9133397]
+offset_left = 16.0
+offset_top = 16.0
+offset_right = 16.0
+offset_bottom = 16.0
