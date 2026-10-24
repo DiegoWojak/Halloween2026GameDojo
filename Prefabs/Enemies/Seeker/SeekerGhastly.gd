@@ -36,10 +36,12 @@ func _physics_process(delta: float) -> void:
 	var player := get_tree().get_first_node_in_group("player") as Node2D
 	if not player:
 		return
-	var light := get_tree().get_first_node_in_group("flashlight") as Flashlight
-	var lit := light != null and light.is_on
-	var dist := light.light_outer.global_position.distance_to(global_position) if light else INF
-	var radius := light.outer_radius() * edge_ratio if light else 0.0
+	var flashlight := get_tree().get_first_node_in_group("flashlight") as Flashlight
+	var light := flashlight.active_light() if flashlight else null
+	# "Iluminado" = dentro del ángulo del cono encendido; el alcance se mide con dist/radius.
+	var lit := light != null and light.in_angle(global_position)
+	var dist := light.global_position.distance_to(global_position) if light else INF
+	var radius := light.range_px() * edge_ratio if light else 0.0
 
 	match state:
 		State.CHASE:
@@ -52,7 +54,7 @@ func _physics_process(delta: float) -> void:
 			if not lit:
 				state = State.CHASE
 			else:
-				var away := (global_position - light.light_outer.global_position).normalized()
+				var away := (global_position - light.global_position).normalized()
 				global_position += away * retreat_speed * delta
 				if dist >= radius:
 					state = State.CHARGE

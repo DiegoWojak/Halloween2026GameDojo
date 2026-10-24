@@ -1,7 +1,8 @@
 @tool
 extends CharacterBody2D
-## SOLO PRUEBA: jugador placeholder (círculo). Implementa el contrato que usan los enemigos:
+## SOLO PRUEBA: jugador. Implementa el contrato que usan los enemigos:
 ## grupo "player", die() y stun(push_to).
+## Se mueve con move_* (flechas/WASD). `facing` (4 direcciones) lo usa la Flashlight hija.
 
 @export var speed := 200.0
 @export var stun_time := 1.0
@@ -10,6 +11,10 @@ extends CharacterBody2D
 var _stun_left := 0.0
 var _push_to := Vector2.ZERO
 var _mask := 1
+## Hacia dónde mira. Con diagonal gana el eje horizontal (el de la animación lateral).
+var facing := Vector2.RIGHT
+
+@onready var _sprite: AnimatedSprite2D = $AnimatedSprite2D
 
 
 func die() -> void:
@@ -38,9 +43,14 @@ func _physics_process(delta: float) -> void:
 		modulate = Color(0.4, 0.7, 1, 0.5 + 0.5 * sin(_stun_left * 40)) if _stun_left > 0 else Color.WHITE
 		velocity = (_push_to - global_position).limit_length(push_speed * delta) / delta
 	else:
-		velocity = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down") * speed
+		var input := Input.get_vector("move_left", "move_right", "move_up", "move_down")
+		velocity = input * speed
+		if input.x != 0:
+			facing = Vector2(signf(input.x), 0)
+		elif input.y != 0:
+			facing = Vector2(0, signf(input.y))
 	move_and_slide()
-
-
-func _draw() -> void:
-	draw_circle(Vector2.ZERO, 14, Color.WHITE)
+	# ponytail: arriba/abajo usan walk_side hasta que llegue player_horizontal_mov.png
+	if facing.x != 0:
+		_sprite.flip_h = facing.x < 0
+	_sprite.play(&"walk_side" if velocity.length() > 1.0 else &"idle")
