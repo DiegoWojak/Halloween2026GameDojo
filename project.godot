@@ -14,6 +14,10 @@ config/name="HalloweenGameJam2026"
 config/features=PackedStringArray("4.7", "GL Compatibility")
 config/icon="res://icon.svg"
 
+[audio]
+
+buses/default_bus_layout="uid://c7s8opq7vysn3"
+
 [autoload]
 
 GlobalManager="*uid://bw3luexhctlkp"
@@ -21,7 +25,6 @@ GlobalManager="*uid://bw3luexhctlkp"
 [display]
 
 window/stretch/mode="canvas_items"
-window/stretch/aspect="expand"
 
 [global_group]
 

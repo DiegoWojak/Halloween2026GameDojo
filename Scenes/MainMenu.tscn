@@ -1,0 +1,167 @@
+[gd_scene format=3 uid="uid://nc8v43vxn577"]
+
+[ext_resource type="Script" uid="uid://brb8n0w8tt3g6" path="res://Scripts/MainMenu.gd" id="1_853f1"]
+[ext_resource type="PackedScene" uid="uid://bagmkuypgdpso" path="res://Prefabs/FadeScreen/FadeScreen.tscn" id="1_tt5f1"]
+[ext_resource type="PackedScene" uid="uid://com8xhckl7r3u" path="res://Scenes/TestScene.tscn" id="2_8saeu"]
+[ext_resource type="PackedScene" uid="uid://be5gbkqkt45i3" path="res://Prefabs/UI/Menu/MenuVolumeSlider.tscn" id="3_ghw46"]
+
+[node name="MainMenu" type="Node2D" unique_id=84132316 node_paths=PackedStringArray("fade_screen", "button_play", "button_options", "button_credits", "button_exit", "main_panel", "options_panel", "credits_panel")]
+script = ExtResource("1_853f1")
+next_scene = ExtResource("2_8saeu")
+fade_screen = NodePath("FadeScreen")
+button_play = NodePath("CanvasLayer/MainPanel/BoxContainer/ButtonPlay")
+button_options = NodePath("CanvasLayer/MainPanel/BoxContainer/ButtonOptions")
+button_credits = NodePath("CanvasLayer/MainPanel/BoxContainer/ButtonCredits")
+button_exit = NodePath("CanvasLayer/MainPanel/BoxContainer/ButtonExit")
+main_panel = NodePath("CanvasLayer/MainPanel")
+options_panel = NodePath("CanvasLayer/OptionsPanel")
+credits_panel = NodePath("CanvasLayer/CreditsPanel")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=133252750]
+
+[node name="MainPanel" type="Control" parent="CanvasLayer" unique_id=1156710703]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="BoxContainer" type="BoxContainer" parent="CanvasLayer/MainPanel" unique_id=1385484298]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.3029514
+anchor_top = 0.22839506
+anchor_right = 0.45052084
+anchor_bottom = 0.60493827
+grow_horizontal = 2
+grow_vertical = 2
+vertical = true
+metadata/_edit_use_anchors_ = true
+
+[node name="ButtonPlay" type="Button" parent="CanvasLayer/MainPanel/BoxContainer" unique_id=930972237]
+layout_mode = 2
+theme_override_font_sizes/font_size = 36
+text = "Jugar"
+metadata/_edit_use_anchors_ = true
+
+[node name="ButtonOptions" type="Button" parent="CanvasLayer/MainPanel/BoxContainer" unique_id=2051163895]
+layout_mode = 2
+theme_override_font_sizes/font_size = 36
+text = "Opciones"
+metadata/_edit_use_anchors_ = true
+
+[node name="ButtonCredits" type="Button" parent="CanvasLayer/MainPanel/BoxContainer" unique_id=421138387]
+layout_mode = 2
+theme_override_font_sizes/font_size = 36
+text = "Créditos"
+metadata/_edit_use_anchors_ = true
+
+[node name="ButtonExit" type="Button" parent="CanvasLayer/MainPanel/BoxContainer" unique_id=795196343]
+layout_mode = 2
+theme_override_font_sizes/font_size = 36
+text = "Salir"
+metadata/_edit_use_anchors_ = true
+
+[node name="OptionsPanel" type="Control" parent="CanvasLayer" unique_id=1920169812]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ButtonBack" type="Button" parent="CanvasLayer/OptionsPanel" unique_id=1534710922]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+flat = true
+
+[node name="BoxContainer" type="BoxContainer" parent="CanvasLayer/OptionsPanel" unique_id=1126507736]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 88.0
+offset_top = 73.0
+offset_right = -117.0
+offset_bottom = -73.0
+grow_horizontal = 2
+grow_vertical = 2
+vertical = true
+
+[node name="MenuVolumeSlider" parent="CanvasLayer/OptionsPanel/BoxContainer" unique_id=346528622 instance=ExtResource("3_ghw46")]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="MenuVolumeSlider2" parent="CanvasLayer/OptionsPanel/BoxContainer" unique_id=418159719 instance=ExtResource("3_ghw46")]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="RichTextLabel" parent="CanvasLayer/OptionsPanel/BoxContainer/MenuVolumeSlider2/BoxContainer" parent_id_path=PackedInt32Array(418159719, 372069385) index="1" unique_id=806601581]
+text = "Música"
+
+[node name="MenuVolumeSlider3" parent="CanvasLayer/OptionsPanel/BoxContainer" unique_id=191359955 instance=ExtResource("3_ghw46")]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="RichTextLabel" parent="CanvasLayer/OptionsPanel/BoxContainer/MenuVolumeSlider3/BoxContainer" parent_id_path=PackedInt32Array(191359955, 372069385) index="1" unique_id=806601581]
+text = "Efectos"
+
+[node name="CreditsPanel" type="Control" parent="CanvasLayer" unique_id=172134240]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="CanvasLayer/CreditsPanel" unique_id=748464653]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer/CreditsPanel" unique_id=1830054403]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.48177084
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/normal_font_size = 44
+text = "Diseño
+	---
+Programación
+	Diego
+	Daniel
+Arte
+	---
+Sonido
+	---"
+vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="ButtonBack" type="Button" parent="CanvasLayer/CreditsPanel" unique_id=1655974756]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+flat = true
+
+[node name="FadeScreen" parent="." unique_id=1400393650 instance=ExtResource("1_tt5f1")]
+duration = 0.5
+
+[editable path="CanvasLayer/OptionsPanel/BoxContainer/MenuVolumeSlider"]
+[editable path="CanvasLayer/OptionsPanel/BoxContainer/MenuVolumeSlider2"]
+[editable path="CanvasLayer/OptionsPanel/BoxContainer/MenuVolumeSlider3"]
