@@ -2,17 +2,21 @@
 
 [ext_resource type="Texture2D" uid="uid://g12jwrhqc2o3" path="res://icon.svg" id="1_b5ayd"]
 [ext_resource type="PackedScene" uid="uid://b7xuwjca1x6yn" path="res://Prefabs/Flashlight.tscn" id="2_5lt6y"]
+[ext_resource type="Material" uid="uid://dqi6c4c4oqaa5" path="res://Art/Shaders/JitterUI.tres" id="3_8k7wh"]
 
 [node name="TestScene" type="Node2D" unique_id=1202072820]
 
 [node name="CanvasModulate" type="CanvasModulate" parent="." unique_id=772661277]
+visible = false
 color = Color(0, 0, 0, 1)
 
 [node name="Background" type="Sprite2D" parent="." unique_id=1017869839]
+visible = false
 scale = Vector2(3.2981205, 3.2981205)
 texture = ExtResource("1_b5ayd")
 
 [node name="ItemSecret" type="Sprite2D" parent="." unique_id=1637725834 groups=["secret"]]
+visible = false
 self_modulate = Color(2.454227, 2.454227, 2.454227, 1)
 light_mask = 2
 z_as_relative = false
@@ -21,7 +25,29 @@ scale = Vector2(1.1724977, 1.1724977)
 texture = ExtResource("1_b5ayd")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1650998712]
+visible = false
 
 [node name="Flashlight" parent="." unique_id=78662924 instance=ExtResource("2_5lt6y")]
-position = Vector2(9.999999, -27)
+visible = false
+position = Vector2(-1.0000019, -24)
 scale = Vector2(4.14596, 4.14596)
+
+[node name="HUD" type="CanvasLayer" parent="." unique_id=330511498]
+
+[node name="Label" type="Label" parent="HUD" unique_id=766195169]
+material = ExtResource("3_8k7wh")
+use_parent_material = true
+offset_left = 16.0
+offset_top = 16.0
+offset_right = 16.0
+offset_bottom = 16.0
+text = "Testing Testing Testing Testing Testing Testing Testing Testing Testing "
+
+[node name="EnergyBar" type="ProgressBar" parent="HUD" unique_id=1049309913]
+offset_left = 16.0
+offset_top = 48.0
+offset_right = 216.0
+offset_bottom = 68.0
+show_percentage = false
+
+[editable path="Flashlight"]

@@ -1,0 +1,16 @@
+[gd_scene format=3 uid="uid://cm3dtrqurlrs1"]
+
+[ext_resource type="Script" uid="uid://mayvaiva6fur" path="res://Prefabs/Enemies/Seeker/Seeker.gd" id="1_script"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_hit"]
+radius = 12.0
+
+[node name="Seeker" type="Area2D" unique_id=1145637919 groups=["enemies"]]
+script = ExtResource("1_script")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1418732456]
+shape = SubResource("CircleShape2D_hit")
+
+[node name="Visual" type="Polygon2D" parent="." unique_id=918200922]
+color = Color(1, 1, 0, 1)
+polygon = PackedVector2Array(0, -16, 14, 12, -14, 12)

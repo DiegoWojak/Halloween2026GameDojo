@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://brb8n0w8tt3g6" path="res://Scripts/MainMenu.gd" id="1_853f1"]
 [ext_resource type="PackedScene" uid="uid://bagmkuypgdpso" path="res://Prefabs/FadeScreen/FadeScreen.tscn" id="1_tt5f1"]
-[ext_resource type="PackedScene" uid="uid://com8xhckl7r3u" path="res://Scenes/TestScene.tscn" id="2_8saeu"]
+[ext_resource type="PackedScene" uid="uid://dkvscq6d5iaso" path="res://Scenes/EnemiesTest.tscn" id="2_ghw46"]
 [ext_resource type="PackedScene" uid="uid://be5gbkqkt45i3" path="res://Prefabs/UI/Menu/MenuVolumeSlider.tscn" id="3_ghw46"]
 
 [node name="MainMenu" type="Node2D" unique_id=84132316 node_paths=PackedStringArray("fade_screen", "button_play", "button_options", "button_credits", "button_exit", "main_panel", "options_panel", "credits_panel", "slider_master", "slider_music", "slider_sfx")]
@@ -12,7 +12,7 @@ button_play = NodePath("CanvasLayer/MainPanel/BoxContainer/ButtonPlay")
 button_options = NodePath("CanvasLayer/MainPanel/BoxContainer/ButtonOptions")
 button_credits = NodePath("CanvasLayer/MainPanel/BoxContainer/ButtonCredits")
 button_exit = NodePath("CanvasLayer/MainPanel/BoxContainer/ButtonExit")
-next_scene = ExtResource("2_8saeu")
+next_scene = ExtResource("2_ghw46")
 main_panel = NodePath("CanvasLayer/MainPanel")
 options_panel = NodePath("CanvasLayer/OptionsPanel")
 credits_panel = NodePath("CanvasLayer/CreditsPanel")
