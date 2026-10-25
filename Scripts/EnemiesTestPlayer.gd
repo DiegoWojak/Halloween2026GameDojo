@@ -13,8 +13,16 @@ class_name Jugador
 @export var max_health := 3
 ## Barra opcional (ProgressBar, TextureProgressBar...) que muestra la vida.
 @export var health_bar: Range
+## Pasos en loop mientras camina (bus Effects).
+@export var footstep_sound: AudioStream = preload("res://MusicSfx/footsteps-player.wav")
+## Golpe que quita vida (bus Effects).
+@export var hit_sound: AudioStream = preload("res://MusicSfx/gettinghit.mp3")
+## Al morir, en vez del golpe (bus Effects).
+@export var die_sound: AudioStream = preload("res://MusicSfx/die_effect.mp3")
 
 var health: int
+var _steps := AudioStreamPlayer.new()
+var _hit := AudioStreamPlayer.new()
 var _stun_left := 0.0
 var _push_to := Vector2.ZERO
 var _mask := 1
@@ -28,6 +36,13 @@ func _ready() -> void:
 	if Engine.is_editor_hint():
 		return
 	health = max_health
+	_steps.stream = footstep_sound
+	_steps.bus = &"Effects"
+	add_child(_steps)
+	_hit.stream = hit_sound
+	_hit.bus = &"Effects"
+	_hit.process_mode = Node.PROCESS_MODE_ALWAYS # suena aunque el GameOver pause el juego
+	add_child(_hit)
 	if health_bar:
 		health_bar.max_value = max_health
 		health_bar.value = health
@@ -37,6 +52,8 @@ func _ready() -> void:
 func die(by: Node2D = null) -> void:
 	if _stun_left > 0:
 		return # invulnerable durante el stun
+	_hit.stream = die_sound
+	_hit.play()
 	var game_over := get_tree().get_first_node_in_group("game_over")
 	if game_over:
 		game_over.show_killer.call_deferred(by) # diferido: llega desde una señal de física
@@ -54,6 +71,7 @@ func hurt(by: Node2D, push_to: Vector2) -> void:
 	if health <= 0:
 		die(by)
 	else:
+		_hit.play()
 		stun(push_to)
 
 
@@ -85,6 +103,9 @@ func _physics_process(delta: float) -> void:
 			facing = Vector2(0, signf(input.y))
 	move_and_slide()
 	_animate()
+	var walking := _stun_left <= 0 and velocity.length() > 1.0
+	if walking != _steps.playing:
+		_steps.playing = walking
 
 
 ## walk_side / walk_up / walk_down según facing. Quieto: idle de lado; mirando

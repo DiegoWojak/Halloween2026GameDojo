@@ -4,8 +4,11 @@
 [ext_resource type="PackedScene" uid="uid://bagmkuypgdpso" path="res://Prefabs/FadeScreen/FadeScreen.tscn" id="1_tt5f1"]
 [ext_resource type="PackedScene" uid="uid://dkvscq6d5iaso" path="res://Scenes/EnemiesTest.tscn" id="2_ghw46"]
 [ext_resource type="PackedScene" uid="uid://be5gbkqkt45i3" path="res://Prefabs/UI/Menu/MenuVolumeSlider.tscn" id="3_ghw46"]
+[ext_resource type="AudioStream" uid="uid://dw8v4ok8fgbce" path="res://MusicSfx/Music/background-mainMenu.mp3" id="music_stream"]
+[ext_resource type="Script" path="res://Scripts/MusicTrack.gd" id="music_track"]
+[ext_resource type="AudioStream" uid="uid://bl88aqolbq6o1" path="res://MusicSfx/Music/ambient-horror.mp3" id="ambient_stream"]
 
-[node name="MainMenu" type="Node2D" unique_id=84132316 node_paths=PackedStringArray("fade_screen", "button_play", "button_options", "button_credits", "button_exit", "main_panel", "options_panel", "credits_panel", "slider_master", "slider_music", "slider_sfx")]
+[node name="MainMenu" type="Node2D" unique_id=84132316 node_paths=PackedStringArray("fade_screen", "button_play", "button_options", "button_credits", "button_exit", "main_panel", "options_panel", "credits_panel", "slider_master", "slider_music", "slider_sfx", "buttons_back", "button_save")]
 script = ExtResource("1_853f1")
 fade_screen = NodePath("FadeScreen")
 button_play = NodePath("CanvasLayer/MainPanel/BoxContainer/ButtonPlay")
@@ -19,6 +22,8 @@ credits_panel = NodePath("CanvasLayer/CreditsPanel")
 slider_master = NodePath("CanvasLayer/OptionsPanel/BoxContainer/MenuVolumeSlider/BoxContainer/HSlider")
 slider_music = NodePath("CanvasLayer/OptionsPanel/BoxContainer/MenuVolumeSlider2/BoxContainer/HSlider")
 slider_sfx = NodePath("CanvasLayer/OptionsPanel/BoxContainer/MenuVolumeSlider3/BoxContainer/HSlider")
+buttons_back = [NodePath("CanvasLayer/OptionsPanel/Buttons/ButtonBack"), NodePath("CanvasLayer/CreditsPanel/Buttons/ButtonBack")]
+button_save = NodePath("CanvasLayer/OptionsPanel/Buttons/ButtonSave")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=133252750]
 
@@ -75,14 +80,31 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="ButtonBack" type="Button" parent="CanvasLayer/OptionsPanel" unique_id=1534710922]
+[node name="Buttons" type="HBoxContainer" parent="CanvasLayer/OptionsPanel"]
 layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
 anchor_bottom = 1.0
+offset_left = -220.0
+offset_top = -70.0
+offset_right = 220.0
+offset_bottom = -12.0
 grow_horizontal = 2
-grow_vertical = 2
-flat = true
+grow_vertical = 0
+alignment = 1
+theme_override_constants/separation = 40
+
+[node name="ButtonBack" type="Button" parent="CanvasLayer/OptionsPanel/Buttons" unique_id=1534710922]
+layout_mode = 2
+theme_override_font_sizes/font_size = 36
+text = "Regresar"
+
+[node name="ButtonSave" type="Button" parent="CanvasLayer/OptionsPanel/Buttons"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 36
+text = "Guardar"
 
 [node name="BoxContainer" type="BoxContainer" parent="CanvasLayer/OptionsPanel" unique_id=1126507736]
 layout_mode = 1
@@ -153,17 +175,42 @@ Sonido
 vertical_alignment = 1
 metadata/_edit_use_anchors_ = true
 
-[node name="ButtonBack" type="Button" parent="CanvasLayer/CreditsPanel" unique_id=1655974756]
+[node name="Buttons" type="HBoxContainer" parent="CanvasLayer/CreditsPanel"]
 layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
 anchor_bottom = 1.0
+offset_left = -220.0
+offset_top = -70.0
+offset_right = 220.0
+offset_bottom = -12.0
 grow_horizontal = 2
-grow_vertical = 2
-flat = true
+grow_vertical = 0
+alignment = 1
+theme_override_constants/separation = 40
+
+[node name="ButtonBack" type="Button" parent="CanvasLayer/CreditsPanel/Buttons" unique_id=1655974756]
+layout_mode = 2
+theme_override_font_sizes/font_size = 36
+text = "Regresar"
 
 [node name="FadeScreen" parent="." unique_id=1400393650 instance=ExtResource("1_tt5f1")]
 duration = 0.5
+
+[node name="Music" type="AudioStreamPlayer" parent="." unique_id=1817764210]
+script = ExtResource("music_track")
+stream = ExtResource("music_stream")
+volume_db = -3.0
+bus = &"Music"
+
+[node name="Ambient" type="AudioStreamPlayer" parent="."]
+script = ExtResource("music_track")
+stream = ExtResource("ambient_stream")
+volume_db = -12.0
+bus = &"Music"
+channel = &"ambient"
 
 [editable path="CanvasLayer/OptionsPanel/BoxContainer/MenuVolumeSlider"]
 [editable path="CanvasLayer/OptionsPanel/BoxContainer/MenuVolumeSlider2"]

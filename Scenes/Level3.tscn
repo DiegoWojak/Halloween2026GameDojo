@@ -17,6 +17,9 @@
 [ext_resource type="PackedScene" path="res://Prefabs/Level/Floor.tscn" id="26_floor"]
 [ext_resource type="PackedScene" path="res://Prefabs/Level/Door.tscn" id="27_door"]
 [ext_resource type="PackedScene" path="res://Prefabs/Level/Lever.tscn" id="28_lever"]
+[ext_resource type="AudioStream" uid="uid://bl88aqolbq6o1" path="res://MusicSfx/Music/ambient-horror.mp3" id="music_stream"]
+[ext_resource type="Script" path="res://Scripts/MusicTrack.gd" id="music_track"]
+[ext_resource type="AudioStream" uid="uid://dpuwpdb7aa375" path="res://MusicSfx/Music/level3-loopthis.mp3" id="level_track"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_unshaded"]
 light_mode = 1
@@ -353,3 +356,16 @@ show_percentage = false
 [node name="FadeScreen" parent="." unique_id=829734957 instance=ExtResource("11_fade")]
 
 [node name="GameOver" parent="." unique_id=317671281 instance=ExtResource("25_gameover")]
+
+[node name="Ambient" type="AudioStreamPlayer" parent="." unique_id=1359800678]
+script = ExtResource("music_track")
+stream = ExtResource("music_stream")
+volume_db = -12.0
+bus = &"Music"
+channel = &"ambient"
+
+[node name="LevelMusic" type="AudioStreamPlayer" parent="."]
+script = ExtResource("music_track")
+stream = ExtResource("level_track")
+volume_db = -3.0
+bus = &"Music"

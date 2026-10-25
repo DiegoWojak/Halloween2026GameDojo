@@ -6,7 +6,8 @@ extends Node2D
 @export_group("Escenas")
 ## Nivel siguiente al escapar. Vacío = vuelve a `menu`.
 @export var next_level: PackedScene
-@export var menu: PackedScene
+## Ruta (no PackedScene): MainMenu → EnemiesTest → Nivel_2 → MainMenu sería carga circular.
+@export_file("*.tscn") var menu := "res://Scenes/MainMenu.tscn"
 @export var fade_screen: FadeScreen
 
 var _has_key := false
@@ -40,8 +41,9 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 	_label.text = "¡Escapaste!"
 	if fade_screen:
 		await fade_screen.fade_to_black()
-	var next := next_level if next_level else menu
-	if next:
-		get_tree().change_scene_to_packed(next)
+	if next_level:
+		get_tree().change_scene_to_packed(next_level)
+	elif menu:
+		get_tree().change_scene_to_file(menu)
 	else:
 		get_tree().paused = true

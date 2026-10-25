@@ -29,8 +29,11 @@ var is_light_normal: bool = true
 ## Capa de luz de los enemigos en light_only_ids. Debe estar en el
 ## range_item_cull_mask de light_secret y fuera del de light_normal.
 @export_flags_2d_render var id_light_mask: int = 4
+## Sonido al prender/apagar/cambiar de luz (bus Effects).
+@export var toggle_sound: AudioStream = preload("res://MusicSfx/flashlight.wav")
 
 var _light_only_mat := CanvasItemMaterial.new()
+var _sfx := AudioStreamPlayer.new()
 
 var is_on: bool = true
 var energy: float
@@ -38,6 +41,9 @@ var _secret_shown: bool = false
 
 func _ready() -> void:
 	energy = max_energy
+	_sfx.stream = toggle_sound
+	_sfx.bus = &"Effects"
+	add_child(_sfx)
 	add_to_group("flashlight")
 	_light_only_mat.light_mode = CanvasItemMaterial.LIGHT_MODE_LIGHT_ONLY
 	if energy_bar:
@@ -88,6 +94,9 @@ func _switch(normal: bool) -> void:
 	elif energy > 0:
 		is_on = true
 		is_light_normal = normal
+	else:
+		return
+	_sfx.play()
 
 ## Luz encendida en este momento, o null si está apagada.
 func active_light() -> ConeLight:

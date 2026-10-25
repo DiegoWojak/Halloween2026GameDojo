@@ -15,6 +15,10 @@ const SIZE := Vector2(28, 28)
 @export var closes: Array[Door] = []
 ## Capa de luz que solo ilumina la luz UV: la palanca no se ve con la luz normal.
 @export_flags_2d_render var uv_light_mask := 2
+## Sonido al activarla (bus Effects). No suena si ya estaba encendida.
+@export var step_sound: AudioStream = preload("res://MusicSfx/lever-step.mp3")
+
+var _sfx := AudioStreamPlayer.new()
 
 
 func _ready() -> void:
@@ -29,12 +33,17 @@ func _ready() -> void:
 	mat.light_mode = CanvasItemMaterial.LIGHT_MODE_LIGHT_ONLY
 	material = mat
 	light_mask = uv_light_mask
+	_sfx.stream = step_sound
+	_sfx.bus = &"Effects"
+	add_child(_sfx)
 	body_entered.connect(_on_body_entered)
 
 
 func _on_body_entered(body: Node2D) -> void:
 	if not body.is_in_group("player"):
 		return
+	if not is_on():
+		_sfx.play()
 	for door in opens:
 		door.open = true
 	for door in closes:
