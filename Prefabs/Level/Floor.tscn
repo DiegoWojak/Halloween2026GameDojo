@@ -1,0 +1,8 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://Prefabs/Level/Floor.gd" id="1_floor"]
+
+[node name="Floor" type="Node2D"]
+texture_filter = 1
+texture_repeat = 2
+script = ExtResource("1_floor")

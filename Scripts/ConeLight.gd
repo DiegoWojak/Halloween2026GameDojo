@@ -41,7 +41,8 @@ func _validate_property(property: Dictionary) -> void:
 func _rebuild() -> void:
 	if not is_node_ready():
 		return
-	var img := Image.create(size, size, false, Image.FORMAT_L8)
+	# Intensidad en RGB (iluminación normal) y en alpha (máscara de los materiales LIGHT_ONLY)
+	var img := Image.create(size, size, false, Image.FORMAT_LA8)
 	var c := size / 2.0
 	var half := deg_to_rad(cone_angle) / 2.0
 	var soft := half * softness
@@ -52,7 +53,7 @@ func _rebuild() -> void:
 			var cone := (1.0 - smoothstep(half - soft, half, absf(d.angle()))) * (1.0 - smoothstep(0.7, 1.0, r))
 			var near := 1.0 - smoothstep(near_radius * 0.5, near_radius, r) if near_radius > 0.0 else 0.0
 			var v := maxf(cone, near)
-			img.set_pixel(x, y, Color(v, v, v))
+			img.set_pixel(x, y, Color(v, v, v, v))
 	texture = ImageTexture.create_from_image(img)
 
 

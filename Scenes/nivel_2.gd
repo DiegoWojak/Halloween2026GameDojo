@@ -1,13 +1,7 @@
 @tool
 extends Node2D
- 
-## SOLO PRUEBA: mapa de idea1.png para probar enemigos.
 
-@export_group("Seeker (desde cuartos)")
-## Aparece al entrar a un cuarto, en la esquina más lejana al jugador.
-@export var seeker_scene: PackedScene = preload("res://Prefabs/Enemies/Seeker/Seeker.tscn")
-## Máximo de seekers normales vivos a la vez.
-@export var max_seekers := 2
+## Nivel 2: mapa de tiles con Patrol/Orbiter puestos a mano. Salida en EXIT_RECT, necesita la llave.
 
 @export_group("Ghastly (cualquier lado)")
 ## Aparece en un punto al azar del mapa, lejos del jugador.
@@ -19,14 +13,19 @@ extends Node2D
 ## Distancia mínima al jugador al aparecer.
 @export var ghastly_min_distance := 350.0
 
+@export_group("Mapa")
+## Tamaño del mapa en px (donde puede aparecer el Ghastly).
+@export var map_size := Vector2(1000, 1100)
 
 @export_group("Escenas")
+## Nivel siguiente al escapar. Vacío = pausa.
+@export var next_level: PackedScene
 @export var fade_screen: FadeScreen
 
 const EXIT_RECT := Rect2(440, 0, 120, 40)
 
 var _has_key := false
-var _current_room := -1
+var _escaped := false
 var _ghastly_timer := 0.0
 
 @onready var _player: Node2D = $Player
@@ -34,16 +33,13 @@ var _ghastly_timer := 0.0
 
 
 func _ready() -> void:
-	await fade_screen.fade_to_image()
 	if Engine.is_editor_hint():
 		return
-	var body := StaticBody2D.new()
-	# Rectángulos con grosor (no segmentos) para que el empujón del Patrol no atraviese paredes
-
-	add_child(body)
 	for key in get_tree().get_nodes_in_group("keys"):
 		key.collected.connect(_on_key_collected)
 	_label.text = "Busca la llave"
+	if fade_screen:
+		await fade_screen.fade_to_image()
 
 
 func _on_key_collected() -> void:
@@ -52,19 +48,14 @@ func _on_key_collected() -> void:
 
 
 func _process(delta: float) -> void:
-	if Engine.is_editor_hint():
+	if Engine.is_editor_hint() or _escaped:
 		return
 	var p := _player.position
 	if EXIT_RECT.has_point(p):
 		if _has_key:
-			_label.text = "¡Escapaste!"
-			get_tree().paused = true
-			#aca instatizo nivel
-		else:
-			_label.text = "Necesitas la llave"
-	
-
-		
+			_escape()
+			return
+		_label.text = "Necesitas la llave"
 	if ghastly_interval > 0:
 		_ghastly_timer += delta
 		if _ghastly_timer >= ghastly_interval:
@@ -73,29 +64,24 @@ func _process(delta: float) -> void:
 				_spawn_ghastly(p)
 
 
+func _escape() -> void:
+	_escaped = true
+	_label.text = "¡Escapaste!"
+	if fade_screen:
+		await fade_screen.fade_to_black()
+	if next_level:
+		get_tree().change_scene_to_packed(next_level)
+	else:
+		get_tree().paused = true
+
+
 func _spawn_ghastly(player_pos: Vector2) -> void:
 	var pos := player_pos
 	for i in 20: # ponytail: muestreo al azar; si el mapa es chico puede quedar más cerca que ghastly_min_distance
-		
+		pos = Vector2(randf() * map_size.x, randf() * map_size.y)
 		if pos.distance_to(player_pos) >= ghastly_min_distance:
 			break
 	var g := ghastly_scene.instantiate()
 	g.position = pos
 	g.add_to_group("ghastly")
 	add_child(g)
-
-
-
-
-
-func _spawn_seeker(room: Rect2, player_pos: Vector2) -> void:
-	# Aparece en la esquina del cuarto más lejana al jugador
-	var corners := [room.position, room.position + Vector2(room.size.x, 0), room.end, room.position + Vector2(0, room.size.y)]
-	var best: Vector2 = corners[0]
-	for c in corners:
-		if c.distance_to(player_pos) > best.distance_to(player_pos):
-			best = c
-	var s := seeker_scene.instantiate()
-	s.position = best.lerp(room.get_center(), 0.15)
-	s.add_to_group("seekers")
-	add_child(s)

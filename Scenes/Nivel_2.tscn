@@ -10,6 +10,8 @@
 [ext_resource type="Texture2D" uid="uid://t1f7k7580q3b" path="res://Art/Sprites/Mini_tile_set.png" id="9_2f0qc"]
 [ext_resource type="PackedScene" path="res://Prefabs/Key/Key.tscn" id="9_2sly2"]
 [ext_resource type="PackedScene" uid="uid://bagmkuypgdpso" path="res://Prefabs/FadeScreen/FadeScreen.tscn" id="10_2f0qc"]
+[ext_resource type="PackedScene" uid="uid://cwb1hrbj67kxu" path="res://Prefabs/UI/GameOver/GameOver.tscn" id="11_y2juc"]
+[ext_resource type="PackedScene" uid="uid://w2loqv33i71" path="res://Scenes/Level3.tscn" id="12_level3"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_y2juc"]
 texture = ExtResource("9_2f0qc")
@@ -44,6 +46,7 @@ radius = 14.0
 texture_filter = 1
 texture_repeat = 2
 script = ExtResource("1_5ilcm")
+next_level = ExtResource("12_level3")
 fade_screen = NodePath("FadeScreen")
 
 [node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=1874167986]
@@ -61,10 +64,11 @@ shape = SubResource("RectangleShape2D_8w0r3")
 visible = false
 color = Color(0, 0, 0, 1)
 
-[node name="Player" type="CharacterBody2D" parent="." unique_id=692836180 groups=["player"]]
+[node name="Player" type="CharacterBody2D" parent="." unique_id=692836180 node_paths=PackedStringArray("health_bar") groups=["player"]]
 material = SubResource("CanvasItemMaterial_unshaded")
 position = Vector2(480, 1050)
 script = ExtResource("3_y2juc")
+health_bar = NodePath("../HUD/HealthBar")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Player" unique_id=1115691550]
 use_parent_material = true
@@ -145,7 +149,17 @@ offset_right = 216.0
 offset_bottom = 68.0
 show_percentage = false
 
+[node name="HealthBar" type="ProgressBar" parent="HUD" unique_id=517813088]
+modulate = Color(1, 0.3, 0.3, 1)
+offset_left = 16.0
+offset_top = 76.0
+offset_right = 136.0
+offset_bottom = 96.0
+show_percentage = false
+
 [node name="Key" parent="." unique_id=103710122 instance=ExtResource("9_2sly2")]
 position = Vector2(950, 425)
 
 [node name="FadeScreen" parent="." unique_id=1400393650 instance=ExtResource("10_2f0qc")]
+
+[node name="GameOver" parent="." unique_id=1118294719 instance=ExtResource("11_y2juc")]
