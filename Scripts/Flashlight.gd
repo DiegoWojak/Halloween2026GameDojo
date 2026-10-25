@@ -9,6 +9,11 @@ class_name Flashlight extends Node2D
 @export var light_normal: ConeLight
 ## Luz ultravioleta.
 @export var light_secret: ConeLight
+## Opcional: acompaña a la luz normal, más larga y tenue, para ver más lejos.
+## Como la normal, no revela los enemigos de light_only_ids.
+@export var light_outer: ConeLight
+## Qué tan rápido gira hacia `facing` (más alto = más rápido).
+@export var turn_speed := 10.0
 var is_light_normal: bool = true
 
 @export_group("Energy")
@@ -41,7 +46,8 @@ func _ready() -> void:
 func _process(delta: float):
 	var parent := get_parent()
 	if "facing" in parent:
-		rotation = (parent.facing as Vector2).angle()
+		# lerp_angle toma el camino corto y frena al llegar (ease-out)
+		rotation = lerp_angle(rotation, (parent.facing as Vector2).angle(), 1.0 - exp(-turn_speed * delta))
 	else:
 		look_at(get_global_mouse_position())
 	if Input.is_action_just_pressed("flashlight_toggle"):
@@ -57,6 +63,8 @@ func _process(delta: float):
 
 	light_normal.visible = is_on and is_light_normal
 	light_secret.visible = is_on and not is_light_normal
+	if light_outer:
+		light_outer.visible = is_on and is_light_normal
 	var secret_visible := is_on and not is_light_normal
 	if secret_visible != _secret_shown:
 		_secret_shown = secret_visible

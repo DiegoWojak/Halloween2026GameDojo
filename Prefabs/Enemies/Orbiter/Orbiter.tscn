@@ -1,12 +1,82 @@
 [gd_scene format=3]
 
 [ext_resource type="Script" path="res://Prefabs/Enemies/Orbiter/Orbiter.gd" id="1_script"]
+[ext_resource type="Texture2D" uid="uid://c3dj8lbfuoa0" path="res://Art/Sprites/enemy_type1.png" id="2_sheet"]
+
+[sub_resource type="AtlasTexture" id="frame_0"]
+atlas = ExtResource("2_sheet")
+region = Rect2(0, 0, 50, 54)
+
+[sub_resource type="AtlasTexture" id="frame_1"]
+atlas = ExtResource("2_sheet")
+region = Rect2(50, 0, 50, 54)
+
+[sub_resource type="AtlasTexture" id="frame_2"]
+atlas = ExtResource("2_sheet")
+region = Rect2(100, 0, 50, 54)
+
+[sub_resource type="AtlasTexture" id="frame_3"]
+atlas = ExtResource("2_sheet")
+region = Rect2(150, 0, 50, 54)
+
+[sub_resource type="AtlasTexture" id="frame_4"]
+atlas = ExtResource("2_sheet")
+region = Rect2(200, 0, 50, 54)
+
+[sub_resource type="AtlasTexture" id="frame_5"]
+atlas = ExtResource("2_sheet")
+region = Rect2(250, 0, 50, 54)
+
+[sub_resource type="AtlasTexture" id="frame_6"]
+atlas = ExtResource("2_sheet")
+region = Rect2(300, 0, 50, 54)
+
+[sub_resource type="AtlasTexture" id="frame_7"]
+atlas = ExtResource("2_sheet")
+region = Rect2(350, 0, 50, 54)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_orbiter"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("frame_0")
+}, {
+"duration": 1.0,
+"texture": SubResource("frame_1")
+}, {
+"duration": 1.0,
+"texture": SubResource("frame_2")
+}, {
+"duration": 1.0,
+"texture": SubResource("frame_3")
+}, {
+"duration": 1.0,
+"texture": SubResource("frame_4")
+}, {
+"duration": 1.0,
+"texture": SubResource("frame_5")
+}, {
+"duration": 1.0,
+"texture": SubResource("frame_6")
+}, {
+"duration": 1.0,
+"texture": SubResource("frame_7")
+}],
+"loop": true,
+"name": &"default",
+"speed": 10.0
+}]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_hit"]
 radius = 12.0
 
 [node name="Orbiter" type="Area2D" groups=["enemies"]]
 script = ExtResource("1_script")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+sprite_frames = SubResource("SpriteFrames_orbiter")
+autoplay = "default"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_hit")

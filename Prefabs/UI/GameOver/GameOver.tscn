@@ -1,0 +1,66 @@
+[gd_scene format=3 uid="uid://cwb1hrbj67kxu"]
+
+[ext_resource type="Script" uid="uid://cpx55knuh1u2o" path="res://Prefabs/UI/GameOver/GameOver.gd" id="1_go"]
+[ext_resource type="Material" uid="uid://dqi6c4c4oqaa5" path="res://Art/Shaders/JitterUI.tres" id="2_jitter"]
+
+[node name="GameOver" type="CanvasLayer" unique_id=1118294719 groups=["game_over"]]
+process_mode = 3
+layer = 10
+script = ExtResource("1_go")
+
+[node name="Dim" type="ColorRect" parent="." unique_id=193065396]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.75)
+
+[node name="Center" type="CenterContainer" parent="." unique_id=731663902]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBox" type="VBoxContainer" parent="Center" unique_id=1393814664]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="Title" type="Label" parent="Center/VBox" unique_id=1776328509]
+material = ExtResource("2_jitter")
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "Te atrapó"
+horizontal_alignment = 1
+
+[node name="Preview" type="ColorRect" parent="Center/VBox" unique_id=1271595386]
+unique_name_in_owner = true
+texture_filter = 1
+custom_minimum_size = Vector2(240, 240)
+clip_contents = true
+layout_mode = 2
+size_flags_horizontal = 4
+color = Color(0.54901963, 0.5019608, 0.6, 0)
+
+[node name="KillerName" type="Label" parent="Center/VBox" unique_id=113670508]
+unique_name_in_owner = true
+material = ExtResource("2_jitter")
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+horizontal_alignment = 1
+
+[node name="Buttons" type="HBoxContainer" parent="Center/VBox" unique_id=215147799]
+layout_mode = 2
+theme_override_constants/separation = 24
+alignment = 1
+
+[node name="Restart" type="Button" parent="Center/VBox/Buttons" unique_id=166458357]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Reiniciar"
+
+[node name="Menu" type="Button" parent="Center/VBox/Buttons" unique_id=1730962239]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Volver al menú"

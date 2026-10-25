@@ -1,0 +1,355 @@
+[gd_scene format=3 uid="uid://w2loqv33i71"]
+
+[ext_resource type="Script" uid="uid://b65kybwerhq6e" path="res://Scripts/Level.gd" id="1_level"]
+[ext_resource type="Script" uid="uid://2yxtu4jirkhp" path="res://Scripts/EnemiesTestPlayer.gd" id="2_player"]
+[ext_resource type="Script" uid="uid://dndjvlsrli5pa" path="res://Prefabs/Level/Floor.gd" id="3_ktnig"]
+[ext_resource type="Texture2D" uid="uid://bfifhu24netd8" path="res://Art/Sprites/broken_wall.png" id="4_nfsas"]
+[ext_resource type="PackedScene" uid="uid://b7xuwjca1x6yn" path="res://Prefabs/Flashlight.tscn" id="5_flashlight"]
+[ext_resource type="PackedScene" path="res://Prefabs/Key/Key.tscn" id="7_key"]
+[ext_resource type="Material" uid="uid://dqi6c4c4oqaa5" path="res://Art/Shaders/JitterUI.tres" id="8_jitter"]
+[ext_resource type="SpriteFrames" uid="uid://bdo7pfir7gteu" path="res://Art/Sprites/PlayerFrames.tres" id="9_frames"]
+[ext_resource type="PackedScene" uid="uid://bagmkuypgdpso" path="res://Prefabs/FadeScreen/FadeScreen.tscn" id="11_fade"]
+[ext_resource type="PackedScene" path="res://Prefabs/Level/Wall.tscn" id="20_wall"]
+[ext_resource type="PackedScene" path="res://Prefabs/Level/TopHouse.tscn" id="22_top"]
+[ext_resource type="PackedScene" path="res://Prefabs/Level/Room.tscn" id="23_room"]
+[ext_resource type="PackedScene" path="res://Prefabs/Level/Exit.tscn" id="24_exit"]
+[ext_resource type="PackedScene" uid="uid://cwb1hrbj67kxu" path="res://Prefabs/UI/GameOver/GameOver.tscn" id="25_gameover"]
+[ext_resource type="PackedScene" path="res://Prefabs/Level/Floor.tscn" id="26_floor"]
+[ext_resource type="PackedScene" path="res://Prefabs/Level/Door.tscn" id="27_door"]
+[ext_resource type="PackedScene" path="res://Prefabs/Level/Lever.tscn" id="28_lever"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_unshaded"]
+light_mode = 1
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_player"]
+radius = 14.0
+
+[node name="Level3" type="Node2D" unique_id=1907981099 node_paths=PackedStringArray("fade_screen")]
+texture_filter = 1
+texture_repeat = 2
+script = ExtResource("1_level")
+map_size = Vector2(1824, 1920)
+fade_screen = NodePath("FadeScreen")
+
+[node name="CanvasModulate" type="CanvasModulate" parent="." unique_id=708738571]
+color = Color(0, 0, 0, 1)
+
+[node name="Floors" type="Node2D" parent="." unique_id=477662254]
+
+[node name="RightCol" parent="Floors" unique_id=962326387 instance=ExtResource("26_floor")]
+position = Vector2(1632, 160)
+size = Vector2(128, 960)
+
+[node name="GreenGap" parent="Floors" unique_id=1603474474 instance=ExtResource("26_floor")]
+position = Vector2(1632, 1120)
+size = Vector2(128, 32)
+
+[node name="Start" parent="Floors" unique_id=2041727109 instance=ExtResource("26_floor")]
+position = Vector2(1632, 1152)
+size = Vector2(128, 384)
+
+[node name="Top" parent="Floors" unique_id=1499915471 instance=ExtResource("26_floor")]
+position = Vector2(1216, 160)
+size = Vector2(416, 160)
+
+[node name="LeftCol" parent="Floors" unique_id=1643496047 instance=ExtResource("26_floor")]
+position = Vector2(1216, 320)
+size = Vector2(128, 1248)
+
+[node name="Bottom" parent="Floors" unique_id=1881254602 instance=ExtResource("26_floor")]
+position = Vector2(832, 1440)
+size = Vector2(384, 128)
+
+[node name="Center" parent="Floors" unique_id=1718260468 instance=ExtResource("26_floor")]
+position = Vector2(448, 800)
+size = Vector2(480, 640)
+
+[node name="Node2D" type="Node2D" parent="Floors/Center" unique_id=1843108887]
+position = Vector2(92, 260)
+script = ExtResource("3_ktnig")
+texture = ExtResource("4_nfsas")
+size = Vector2(300, 128)
+
+[node name="LeverHall" parent="Floors" unique_id=281635692 instance=ExtResource("26_floor")]
+position = Vector2(960, 448)
+size = Vector2(192, 736)
+
+[node name="BlueGap" parent="Floors" unique_id=793499557 instance=ExtResource("26_floor")]
+position = Vector2(928, 1024)
+size = Vector2(32, 96)
+
+[node name="ExitHall" parent="Floors" unique_id=1593595627 instance=ExtResource("26_floor")]
+position = Vector2(576, 512)
+size = Vector2(192, 256)
+
+[node name="ExitGap" parent="Floors" unique_id=1906125181 instance=ExtResource("26_floor")]
+position = Vector2(576, 768)
+size = Vector2(192, 32)
+
+[node name="KeyRoom" parent="Floors" unique_id=25318689 instance=ExtResource("26_floor")]
+position = Vector2(128, 1056)
+size = Vector2(288, 256)
+
+[node name="RedGap" parent="Floors" unique_id=1640324291 instance=ExtResource("26_floor")]
+position = Vector2(416, 1056)
+size = Vector2(32, 256)
+
+[node name="KeyHall" parent="Floors" unique_id=1760533226 instance=ExtResource("26_floor")]
+position = Vector2(224, 1312)
+size = Vector2(160, 544)
+
+[node name="Walls" type="Node2D" parent="." unique_id=1757004869]
+
+[node name="Wall0" parent="Walls" unique_id=1795723327 instance=ExtResource("20_wall")]
+position = Vector2(1216, 96)
+size = Vector2(544, 64)
+
+[node name="Top1" parent="Walls" unique_id=709546813 instance=ExtResource("22_top")]
+position = Vector2(1344, 320)
+size = Vector2(288, 8)
+
+[node name="Wall2" parent="Walls" unique_id=834378939 instance=ExtResource("20_wall")]
+position = Vector2(960, 384)
+size = Vector2(192, 64)
+
+[node name="Wall3" parent="Walls" unique_id=982499092 instance=ExtResource("20_wall")]
+position = Vector2(576, 448)
+size = Vector2(192, 64)
+
+[node name="Wall4" parent="Walls" unique_id=1833582516 instance=ExtResource("20_wall")]
+position = Vector2(448, 736)
+size = Vector2(128, 64)
+
+[node name="Wall5" parent="Walls" unique_id=1920910424 instance=ExtResource("20_wall")]
+position = Vector2(768, 736)
+size = Vector2(160, 64)
+
+[node name="Wall6" parent="Walls" unique_id=735152240 instance=ExtResource("20_wall")]
+position = Vector2(928, 960)
+size = Vector2(32, 64)
+
+[node name="Wall7" parent="Walls" unique_id=1492790185 instance=ExtResource("20_wall")]
+position = Vector2(128, 992)
+size = Vector2(320, 64)
+
+[node name="Top8" parent="Walls" unique_id=172472077 instance=ExtResource("22_top")]
+position = Vector2(928, 1120)
+size = Vector2(32, 8)
+
+[node name="Top9" parent="Walls" unique_id=1229577109 instance=ExtResource("22_top")]
+position = Vector2(960, 1184)
+size = Vector2(192, 8)
+
+[node name="Top10" parent="Walls" unique_id=529500119 instance=ExtResource("22_top")]
+position = Vector2(128, 1312)
+size = Vector2(96, 8)
+
+[node name="Top11" parent="Walls" unique_id=1130066079 instance=ExtResource("22_top")]
+position = Vector2(384, 1312)
+size = Vector2(64, 8)
+
+[node name="Top12" parent="Walls" unique_id=478202876 instance=ExtResource("22_top")]
+position = Vector2(448, 1440)
+size = Vector2(384, 8)
+
+[node name="Wall13" parent="Walls" unique_id=1580067677 instance=ExtResource("20_wall")]
+position = Vector2(928, 1376)
+size = Vector2(288, 64)
+
+[node name="Top14" parent="Walls" unique_id=92667339 instance=ExtResource("22_top")]
+position = Vector2(1632, 1536)
+size = Vector2(128, 8)
+
+[node name="Top15" parent="Walls" unique_id=376124651 instance=ExtResource("22_top")]
+position = Vector2(832, 1568)
+size = Vector2(512, 8)
+
+[node name="Top16" parent="Walls" unique_id=1010144121 instance=ExtResource("22_top")]
+position = Vector2(224, 1856)
+size = Vector2(160, 8)
+
+[node name="Top17" parent="Walls" unique_id=1069680514 instance=ExtResource("22_top")]
+position = Vector2(120, 992)
+size = Vector2(8, 328)
+
+[node name="Top18" parent="Walls" unique_id=2142875857 instance=ExtResource("22_top")]
+position = Vector2(216, 1312)
+size = Vector2(8, 552)
+
+[node name="Top19" parent="Walls" unique_id=569784083 instance=ExtResource("22_top")]
+position = Vector2(384, 1312)
+size = Vector2(8, 552)
+
+[node name="Top20" parent="Walls" unique_id=2104068511 instance=ExtResource("22_top")]
+position = Vector2(440, 736)
+size = Vector2(8, 320)
+
+[node name="Top21" parent="Walls" unique_id=1271386358 instance=ExtResource("22_top")]
+position = Vector2(440, 1312)
+size = Vector2(8, 136)
+
+[node name="Top22" parent="Walls" unique_id=1956234997 instance=ExtResource("22_top")]
+position = Vector2(568, 448)
+size = Vector2(8, 352)
+
+[node name="Top23" parent="Walls" unique_id=508444258 instance=ExtResource("22_top")]
+position = Vector2(768, 448)
+size = Vector2(8, 352)
+
+[node name="Top24" parent="Walls" unique_id=936042728 instance=ExtResource("22_top")]
+position = Vector2(824, 1440)
+size = Vector2(8, 136)
+
+[node name="Top25" parent="Walls" unique_id=1453778810 instance=ExtResource("22_top")]
+position = Vector2(928, 736)
+size = Vector2(8, 288)
+
+[node name="Top26" parent="Walls" unique_id=1760155660 instance=ExtResource("22_top")]
+position = Vector2(928, 1120)
+size = Vector2(8, 320)
+
+[node name="Top27" parent="Walls" unique_id=1367928924 instance=ExtResource("22_top")]
+position = Vector2(952, 384)
+size = Vector2(8, 640)
+
+[node name="Top28" parent="Walls" unique_id=2108473432 instance=ExtResource("22_top")]
+position = Vector2(952, 1120)
+size = Vector2(8, 72)
+
+[node name="Top29" parent="Walls" unique_id=1267953665 instance=ExtResource("22_top")]
+position = Vector2(1152, 384)
+size = Vector2(8, 808)
+
+[node name="Top30" parent="Walls" unique_id=1092423104 instance=ExtResource("22_top")]
+position = Vector2(1208, 96)
+size = Vector2(8, 1344)
+
+[node name="Top31" parent="Walls" unique_id=1545619955 instance=ExtResource("22_top")]
+position = Vector2(1344, 320)
+size = Vector2(8, 1256)
+
+[node name="Top32" parent="Walls" unique_id=312608347 instance=ExtResource("22_top")]
+position = Vector2(1624, 320)
+size = Vector2(8, 1224)
+
+[node name="Top33" parent="Walls" unique_id=497481496 instance=ExtResource("22_top")]
+position = Vector2(1760, 96)
+size = Vector2(8, 1448)
+
+[node name="Doors" type="Node2D" parent="." unique_id=1327935698]
+
+[node name="GreenDoor" parent="Doors" unique_id=1798408198 instance=ExtResource("27_door")]
+position = Vector2(1632, 1120)
+color = Color(0.3, 1, 0.4, 1)
+size = Vector2(128, 32)
+
+[node name="BlueDoor" parent="Doors" unique_id=1662122623 instance=ExtResource("27_door")]
+position = Vector2(928, 1024)
+color = Color(0.3, 0.5, 1, 1)
+
+[node name="RedDoor" parent="Doors" unique_id=2133391040 instance=ExtResource("27_door")]
+position = Vector2(416, 1056)
+color = Color(1, 0.25, 0.25, 1)
+size = Vector2(32, 256)
+
+[node name="ExitDoor" parent="Doors" unique_id=820706309 instance=ExtResource("27_door")]
+position = Vector2(576, 768)
+color = Color(1, 0.85, 0.3, 1)
+size = Vector2(192, 32)
+
+[node name="Levers" type="Node2D" parent="." unique_id=328021877]
+
+[node name="GreenLever" parent="Levers" unique_id=1639570907 node_paths=PackedStringArray("opens") instance=ExtResource("28_lever")]
+position = Vector2(1696, 1280)
+color = Color(0.3, 1, 0.4, 1)
+opens = [NodePath("../../Doors/GreenDoor")]
+
+[node name="BlueLever" parent="Levers" unique_id=1897762907 node_paths=PackedStringArray("opens", "closes") instance=ExtResource("28_lever")]
+position = Vector2(608, 1120)
+color = Color(0.3, 0.5, 1, 1)
+opens = [NodePath("../../Doors/BlueDoor")]
+closes = [NodePath("../../Doors/RedDoor")]
+
+[node name="RedLever" parent="Levers" unique_id=846598399 node_paths=PackedStringArray("opens", "closes") instance=ExtResource("28_lever")]
+position = Vector2(768, 1120)
+color = Color(1, 0.25, 0.25, 1)
+opens = [NodePath("../../Doors/RedDoor")]
+closes = [NodePath("../../Doors/BlueDoor")]
+
+[node name="ExitLever" parent="Levers" unique_id=180732926 node_paths=PackedStringArray("opens") instance=ExtResource("28_lever")]
+position = Vector2(1056, 560)
+color = Color(1, 0.85, 0.3, 1)
+opens = [NodePath("../../Doors/ExitDoor")]
+
+[node name="Rooms" type="Node2D" parent="." unique_id=1464341635]
+
+[node name="Center" parent="Rooms" unique_id=933347048 instance=ExtResource("23_room")]
+position = Vector2(448, 800)
+size = Vector2(480, 640)
+
+[node name="KeyRoom" parent="Rooms" unique_id=802378885 instance=ExtResource("23_room")]
+position = Vector2(128, 1056)
+size = Vector2(288, 256)
+
+[node name="Exit" parent="." unique_id=1624876600 instance=ExtResource("24_exit")]
+position = Vector2(576, 512)
+size = Vector2(192, 48)
+
+[node name="Key" parent="." unique_id=1229868898 instance=ExtResource("7_key")]
+position = Vector2(304, 1792)
+
+[node name="Player" type="CharacterBody2D" parent="." unique_id=2012835617 node_paths=PackedStringArray("health_bar") groups=["player"]]
+material = SubResource("CanvasItemMaterial_unshaded")
+position = Vector2(1696, 1440)
+script = ExtResource("2_player")
+health_bar = NodePath("../HUD/HealthBar")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Player" unique_id=1184507306]
+use_parent_material = true
+sprite_frames = ExtResource("9_frames")
+animation = &"idle"
+autoplay = "idle"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player" unique_id=1151528623]
+shape = SubResource("CircleShape2D_player")
+
+[node name="Camera2D" type="Camera2D" parent="Player" unique_id=554303217]
+zoom = Vector2(1.5, 1.5)
+limit_left = 0
+limit_top = 0
+limit_right = 1824
+limit_bottom = 1920
+
+[node name="Flashlight" parent="Player" unique_id=1460726686 node_paths=PackedStringArray("energy_bar") instance=ExtResource("5_flashlight")]
+scale = Vector2(4, 4)
+drain_rate = 5.0
+energy_bar = NodePath("../../HUD/EnergyBar")
+light_only_ids = Array[StringName]([&"Orbiter", &"GreenLever"])
+
+[node name="HUD" type="CanvasLayer" parent="." unique_id=1208942702]
+
+[node name="Label" type="Label" parent="HUD" unique_id=479461433]
+material = ExtResource("8_jitter")
+offset_left = 16.0
+offset_top = 16.0
+offset_right = 16.0
+offset_bottom = 16.0
+
+[node name="EnergyBar" type="ProgressBar" parent="HUD" unique_id=108369994]
+offset_left = 16.0
+offset_top = 48.0
+offset_right = 216.0
+offset_bottom = 68.0
+show_percentage = false
+
+[node name="HealthBar" type="ProgressBar" parent="HUD" unique_id=1636755833]
+modulate = Color(1, 0.3, 0.3, 1)
+offset_left = 16.0
+offset_top = 76.0
+offset_right = 136.0
+offset_bottom = 96.0
+show_percentage = false
+
+[node name="FadeScreen" parent="." unique_id=829734957 instance=ExtResource("11_fade")]
+
+[node name="GameOver" parent="." unique_id=317671281 instance=ExtResource("25_gameover")]

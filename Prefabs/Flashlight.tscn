@@ -3,10 +3,19 @@
 [ext_resource type="Script" uid="uid://dbj4ce5rpt2ai" path="res://Scripts/Flashlight.gd" id="1_e7i2y"]
 [ext_resource type="Script" path="res://Scripts/ConeLight.gd" id="2_cone"]
 
-[node name="Flashlight" type="Node2D" unique_id=78662924 node_paths=PackedStringArray("light_normal", "light_secret")]
+[node name="Flashlight" type="Node2D" unique_id=78662924 node_paths=PackedStringArray("light_normal", "light_secret", "light_outer")]
 script = ExtResource("1_e7i2y")
 light_normal = NodePath("Normal")
 light_secret = NodePath("Secret")
+light_outer = NodePath("Outer")
+
+[node name="Outer" type="PointLight2D" parent="." unique_id=503917264]
+energy = 0.5
+texture_scale = 0.9
+script = ExtResource("2_cone")
+cone_angle = 70.0
+softness = 0.5
+near_radius = 0.0
 
 [node name="Normal" type="PointLight2D" parent="." unique_id=1451971243]
 texture_scale = 0.55

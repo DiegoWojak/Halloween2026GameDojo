@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://dkvscq6d5iaso"]
 
-[ext_resource type="Script" uid="uid://b65kybwerhq6e" path="res://Scripts/EnemiesTestLevel.gd" id="1_level"]
+[ext_resource type="Script" uid="uid://b65kybwerhq6e" path="res://Scripts/Level.gd" id="1_level"]
 [ext_resource type="Script" uid="uid://2yxtu4jirkhp" path="res://Scripts/EnemiesTestPlayer.gd" id="2_player"]
 [ext_resource type="PackedScene" uid="uid://cd36xq0tsdv4b" path="res://Scenes/Nivel_2.tscn" id="3_coos7"]
 [ext_resource type="PackedScene" path="res://Prefabs/Enemies/Patrol/Patrol.tscn" id="3_patrol"]
@@ -11,6 +11,12 @@
 [ext_resource type="Material" uid="uid://dqi6c4c4oqaa5" path="res://Art/Shaders/JitterUI.tres" id="8_jitter"]
 [ext_resource type="SpriteFrames" uid="uid://bdo7pfir7gteu" path="res://Art/Sprites/PlayerFrames.tres" id="9_frames"]
 [ext_resource type="PackedScene" uid="uid://bagmkuypgdpso" path="res://Prefabs/FadeScreen/FadeScreen.tscn" id="11_q4gsj"]
+[ext_resource type="PackedScene" path="res://Prefabs/Level/Wall.tscn" id="20_wall"]
+[ext_resource type="PackedScene" path="res://Prefabs/Level/WallColumn.tscn" id="21_col"]
+[ext_resource type="PackedScene" path="res://Prefabs/Level/TopHouse.tscn" id="22_top"]
+[ext_resource type="PackedScene" path="res://Prefabs/Level/Room.tscn" id="23_room"]
+[ext_resource type="PackedScene" path="res://Prefabs/Level/Exit.tscn" id="24_exit"]
+[ext_resource type="PackedScene" uid="uid://cwb1hrbj67kxu" path="res://Prefabs/UI/GameOver/GameOver.tscn" id="25_gameover"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_unshaded"]
 light_mode = 1
@@ -23,16 +29,168 @@ texture_filter = 1
 texture_repeat = 2
 script = ExtResource("1_level")
 floor_texture = ExtResource("6_floor")
-level2 = ExtResource("3_coos7")
+next_level = ExtResource("3_coos7")
 fade_screen = NodePath("FadeScreen")
 
 [node name="CanvasModulate" type="CanvasModulate" parent="." unique_id=1757676781]
 color = Color(0, 0, 0, 1)
 
-[node name="Player" type="CharacterBody2D" parent="." unique_id=692836180 groups=["player"]]
+[node name="Walls" type="Node2D" parent="." unique_id=1351676703]
+
+[node name="TopLeft" parent="Walls" unique_id=1901706098 instance=ExtResource("20_wall")]
+size = Vector2(444, 64)
+
+[node name="TopRight" parent="Walls" unique_id=1680575573 instance=ExtResource("20_wall")]
+position = Vector2(556, 0)
+size = Vector2(444, 64)
+
+[node name="H300Left" parent="Walls" unique_id=255072138 instance=ExtResource("20_wall")]
+position = Vector2(0, 292)
+size = Vector2(330, 64)
+
+[node name="H300Right" parent="Walls" unique_id=889086592 instance=ExtResource("20_wall")]
+position = Vector2(670, 292)
+size = Vector2(330, 64)
+
+[node name="H550Left" parent="Walls" unique_id=1363656182 instance=ExtResource("20_wall")]
+position = Vector2(0, 542)
+size = Vector2(304, 64)
+
+[node name="H550Right" parent="Walls" unique_id=1496456855 instance=ExtResource("20_wall")]
+position = Vector2(696, 542)
+size = Vector2(304, 64)
+
+[node name="H850Left" parent="Walls" unique_id=1164097148 instance=ExtResource("20_wall")]
+position = Vector2(0, 842)
+size = Vector2(424, 64)
+
+[node name="H850Right" parent="Walls" unique_id=747815721 instance=ExtResource("20_wall")]
+position = Vector2(536, 842)
+size = Vector2(464, 64)
+
+[node name="Bottom" parent="Walls" unique_id=1264504288 instance=ExtResource("22_top")]
+position = Vector2(0, 1092)
+size = Vector2(1000, 8)
+
+[node name="Left" parent="Walls" unique_id=1866181812 instance=ExtResource("22_top")]
+size = Vector2(8, 1100)
+
+[node name="Right" parent="Walls" unique_id=431312892 instance=ExtResource("22_top")]
+position = Vector2(992, 0)
+size = Vector2(8, 1100)
+
+[node name="V440" parent="Walls" unique_id=1496637415 instance=ExtResource("22_top")]
+position = Vector2(436, 0)
+size = Vector2(8, 236)
+
+[node name="V440End" parent="Walls" unique_id=185127750 instance=ExtResource("21_col")]
+position = Vector2(436, 236)
+
+[node name="V560" parent="Walls" unique_id=389704907 instance=ExtResource("22_top")]
+position = Vector2(556, 0)
+size = Vector2(8, 236)
+
+[node name="V560End" parent="Walls" unique_id=1814195770 instance=ExtResource("21_col")]
+position = Vector2(556, 236)
+
+[node name="V300a" parent="Walls" unique_id=604199613 instance=ExtResource("22_top")]
+position = Vector2(296, 300)
+size = Vector2(8, 36)
+
+[node name="V300aEnd" parent="Walls" unique_id=1298636317 instance=ExtResource("21_col")]
+position = Vector2(296, 336)
+
+[node name="V300b" parent="Walls" unique_id=1398176844 instance=ExtResource("22_top")]
+position = Vector2(296, 500)
+size = Vector2(8, 86)
+
+[node name="V300bEnd" parent="Walls" unique_id=961951326 instance=ExtResource("21_col")]
+position = Vector2(296, 586)
+
+[node name="V300c" parent="Walls" unique_id=443309547 instance=ExtResource("22_top")]
+position = Vector2(296, 750)
+size = Vector2(8, 100)
+
+[node name="V700a" parent="Walls" unique_id=1579325293 instance=ExtResource("22_top")]
+position = Vector2(696, 300)
+size = Vector2(8, 36)
+
+[node name="V700aEnd" parent="Walls" unique_id=826552642 instance=ExtResource("21_col")]
+position = Vector2(696, 336)
+
+[node name="V700b" parent="Walls" unique_id=1071165330 instance=ExtResource("22_top")]
+position = Vector2(696, 500)
+size = Vector2(8, 86)
+
+[node name="V700bEnd" parent="Walls" unique_id=1561873026 instance=ExtResource("21_col")]
+position = Vector2(696, 586)
+
+[node name="V700c" parent="Walls" unique_id=493597200 instance=ExtResource("22_top")]
+position = Vector2(696, 750)
+size = Vector2(8, 100)
+
+[node name="V420a" parent="Walls" unique_id=660694187 instance=ExtResource("22_top")]
+position = Vector2(416, 850)
+size = Vector2(8, 36)
+
+[node name="V420aEnd" parent="Walls" unique_id=393837469 instance=ExtResource("21_col")]
+position = Vector2(416, 886)
+
+[node name="V420b" parent="Walls" unique_id=16606843 instance=ExtResource("22_top")]
+position = Vector2(416, 1050)
+size = Vector2(8, 50)
+
+[node name="V540a" parent="Walls" unique_id=155236862 instance=ExtResource("22_top")]
+position = Vector2(536, 850)
+size = Vector2(8, 36)
+
+[node name="V540aEnd" parent="Walls" unique_id=991624187 instance=ExtResource("21_col")]
+position = Vector2(536, 886)
+
+[node name="V540b" parent="Walls" unique_id=1835021572 instance=ExtResource("22_top")]
+position = Vector2(536, 1050)
+size = Vector2(8, 50)
+
+[node name="Rooms" type="Node2D" parent="." unique_id=1723775956]
+
+[node name="Room1" parent="Rooms" unique_id=274893035 instance=ExtResource("23_room")]
+size = Vector2(440, 300)
+
+[node name="Room2" parent="Rooms" unique_id=1905448788 instance=ExtResource("23_room")]
+position = Vector2(560, 0)
+size = Vector2(440, 300)
+
+[node name="Room3" parent="Rooms" unique_id=229233572 instance=ExtResource("23_room")]
+position = Vector2(0, 300)
+
+[node name="Room4" parent="Rooms" unique_id=1358918951 instance=ExtResource("23_room")]
+position = Vector2(700, 300)
+
+[node name="Room5" parent="Rooms" unique_id=430412399 instance=ExtResource("23_room")]
+position = Vector2(0, 550)
+size = Vector2(300, 300)
+
+[node name="Room6" parent="Rooms" unique_id=883275251 instance=ExtResource("23_room")]
+position = Vector2(700, 550)
+size = Vector2(300, 300)
+
+[node name="Room7" parent="Rooms" unique_id=1876035722 instance=ExtResource("23_room")]
+position = Vector2(0, 850)
+size = Vector2(420, 250)
+
+[node name="Room8" parent="Rooms" unique_id=445135920 instance=ExtResource("23_room")]
+position = Vector2(540, 850)
+size = Vector2(460, 250)
+
+[node name="Exit" parent="." unique_id=169488332 instance=ExtResource("24_exit")]
+position = Vector2(444, 0)
+size = Vector2(112, 40)
+
+[node name="Player" type="CharacterBody2D" parent="." unique_id=692836180 node_paths=PackedStringArray("health_bar") groups=["player"]]
 material = SubResource("CanvasItemMaterial_unshaded")
 position = Vector2(480, 1050)
 script = ExtResource("2_player")
+health_bar = NodePath("../HUD/HealthBar")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Player" unique_id=1600523674]
 use_parent_material = true
@@ -81,11 +239,13 @@ point_b = Vector2(300, 0)
 
 [node name="Orbiter1" parent="." unique_id=230529836 instance=ExtResource("4_orbiter")]
 position = Vector2(150, 425)
+exit_point = Vector2(350, 450)
 
 [node name="Orbiter2" parent="." unique_id=1835364937 instance=ExtResource("4_orbiter")]
 position = Vector2(900, 425)
 mode = 1
 radius = 60.0
+exit_point = Vector2(650, 450)
 
 [node name="Orbiter3" parent="." unique_id=1977273365 instance=ExtResource("4_orbiter")]
 position = Vector2(500, 575)
@@ -96,6 +256,7 @@ speed = 1.5
 [node name="Orbiter4" parent="." unique_id=594297069 instance=ExtResource("4_orbiter")]
 position = Vector2(780, 150)
 radius = 150.0
+exit_point = Vector2(615, 380)
 
 [node name="HUD" type="CanvasLayer" parent="." unique_id=1202816752]
 
@@ -113,7 +274,17 @@ offset_right = 216.0
 offset_bottom = 68.0
 show_percentage = false
 
+[node name="HealthBar" type="ProgressBar" parent="HUD" unique_id=1503022607]
+modulate = Color(1, 0.3, 0.3, 1)
+offset_left = 16.0
+offset_top = 76.0
+offset_right = 136.0
+offset_bottom = 96.0
+show_percentage = false
+
 [node name="Key" parent="." unique_id=103710122 instance=ExtResource("7_sfqgk")]
 position = Vector2(950, 425)
 
 [node name="FadeScreen" parent="." unique_id=1400393650 instance=ExtResource("11_q4gsj")]
+
+[node name="GameOver" parent="." unique_id=603530567 instance=ExtResource("25_gameover")]

@@ -1,6 +1,71 @@
 [gd_scene format=3 uid="uid://cm3dtrqurlrs1"]
 
 [ext_resource type="Script" uid="uid://mayvaiva6fur" path="res://Prefabs/Enemies/Seeker/Seeker.gd" id="1_script"]
+[ext_resource type="Texture2D" uid="uid://dtabv8m2tm7sy" path="res://Art/Sprites/enemy_type_2seeker.png" id="2_sheet"]
+
+[sub_resource type="AtlasTexture" id="frame_0"]
+atlas = ExtResource("2_sheet")
+region = Rect2(0, 0, 50, 54)
+
+[sub_resource type="AtlasTexture" id="frame_1"]
+atlas = ExtResource("2_sheet")
+region = Rect2(50, 0, 50, 54)
+
+[sub_resource type="AtlasTexture" id="frame_2"]
+atlas = ExtResource("2_sheet")
+region = Rect2(100, 0, 50, 54)
+
+[sub_resource type="AtlasTexture" id="frame_3"]
+atlas = ExtResource("2_sheet")
+region = Rect2(150, 0, 50, 54)
+
+[sub_resource type="AtlasTexture" id="frame_4"]
+atlas = ExtResource("2_sheet")
+region = Rect2(200, 0, 50, 54)
+
+[sub_resource type="AtlasTexture" id="frame_5"]
+atlas = ExtResource("2_sheet")
+region = Rect2(250, 0, 50, 54)
+
+[sub_resource type="AtlasTexture" id="frame_6"]
+atlas = ExtResource("2_sheet")
+region = Rect2(300, 0, 50, 54)
+
+[sub_resource type="AtlasTexture" id="frame_7"]
+atlas = ExtResource("2_sheet")
+region = Rect2(350, 0, 50, 54)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_seeker"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("frame_0")
+}, {
+"duration": 1.0,
+"texture": SubResource("frame_1")
+}, {
+"duration": 1.0,
+"texture": SubResource("frame_2")
+}, {
+"duration": 1.0,
+"texture": SubResource("frame_3")
+}, {
+"duration": 1.0,
+"texture": SubResource("frame_4")
+}, {
+"duration": 1.0,
+"texture": SubResource("frame_5")
+}, {
+"duration": 1.0,
+"texture": SubResource("frame_6")
+}, {
+"duration": 1.0,
+"texture": SubResource("frame_7")
+}],
+"loop": true,
+"name": &"default",
+"speed": 10.0
+}]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_hit"]
 radius = 12.0
@@ -11,6 +76,7 @@ script = ExtResource("1_script")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1418732456]
 shape = SubResource("CircleShape2D_hit")
 
-[node name="Visual" type="Polygon2D" parent="." unique_id=918200922]
-color = Color(1, 1, 0, 1)
-polygon = PackedVector2Array(0, -16, 14, 12, -14, 12)
+[node name="Visual" type="AnimatedSprite2D" parent="." unique_id=918200922]
+texture_filter = 1
+sprite_frames = SubResource("SpriteFrames_seeker")
+autoplay = "default"
