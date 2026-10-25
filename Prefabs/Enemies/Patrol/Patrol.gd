@@ -68,7 +68,6 @@ func _on_hitbox_body_entered(body: Node2D) -> void:
 
 
 func _draw() -> void:
-	draw_rect(Rect2(-14, -14, 28, 28), Color.RED)
 	if not Engine.is_editor_hint():
 		return
 	# Ayudas visuales solo en el editor: zona vigilada, ruta y punto de empuje

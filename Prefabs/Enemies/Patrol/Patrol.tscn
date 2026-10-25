@@ -1,6 +1,57 @@
 [gd_scene format=3]
 
 [ext_resource type="Script" path="res://Prefabs/Enemies/Patrol/Patrol.gd" id="1_script"]
+[ext_resource type="Texture2D" uid="uid://dgm1j2kl6ioyr" path="res://Art/Sprites/enemy_type_3patrol.png" id="2_sheet"]
+
+[sub_resource type="AtlasTexture" id="frame_0"]
+atlas = ExtResource("2_sheet")
+region = Rect2(0, 0, 50, 54)
+
+[sub_resource type="AtlasTexture" id="frame_1"]
+atlas = ExtResource("2_sheet")
+region = Rect2(50, 0, 50, 54)
+
+[sub_resource type="AtlasTexture" id="frame_2"]
+atlas = ExtResource("2_sheet")
+region = Rect2(100, 0, 50, 54)
+
+[sub_resource type="AtlasTexture" id="frame_3"]
+atlas = ExtResource("2_sheet")
+region = Rect2(150, 0, 50, 54)
+
+[sub_resource type="AtlasTexture" id="frame_4"]
+atlas = ExtResource("2_sheet")
+region = Rect2(200, 0, 50, 54)
+
+[sub_resource type="AtlasTexture" id="frame_5"]
+atlas = ExtResource("2_sheet")
+region = Rect2(250, 0, 50, 54)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_patrol"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("frame_0")
+}, {
+"duration": 1.0,
+"texture": SubResource("frame_1")
+}, {
+"duration": 1.0,
+"texture": SubResource("frame_2")
+}, {
+"duration": 1.0,
+"texture": SubResource("frame_3")
+}, {
+"duration": 1.0,
+"texture": SubResource("frame_4")
+}, {
+"duration": 1.0,
+"texture": SubResource("frame_5")
+}],
+"loop": true,
+"name": &"default",
+"speed": 10.0
+}]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_body"]
 size = Vector2(28, 28)
@@ -10,6 +61,11 @@ size = Vector2(34, 34)
 
 [node name="Patrol" type="CharacterBody2D" groups=["enemies"]]
 script = ExtResource("1_script")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+sprite_frames = SubResource("SpriteFrames_patrol")
+autoplay = "default"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_body")
